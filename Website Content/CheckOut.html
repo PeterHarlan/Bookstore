@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="description" content="Buy your books at the WKU Bookstore">
+  <meta name="keywords" content="wku, bookstore, Western Kentucky University, college, bowling green, kentucky, ky, bg">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>WKU Bookstore</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome-->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+
+</head>
+
+<!--*********************************************-->
+<!--onload calls the java script when the webpage is loaded-->
+<body onload="getFocus()">
+
+  <!--Custom CSS-->
+  <style>
+  .homeImage {
+    /* The image used */
+    background-image: url("img/homeImage.jpg");
+
+    /* Center and scale the image nicely */
+    background-position: 55% 0%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style> 
+
+<!--Navigation-->
+<!--Add navbar-light bg-faded  to make navbar visiable-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.html">WKU Books</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end"" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sign in
+        </a>
+        <div class="dropdown-menu px-2" aria-labelledby="navbarDropdown">
+          <input  class="dropdown-item form-control mt-1" type="text" id="Email" placeholder="email">
+          <input  class="dropdown-item form-control my-1" type="password" id="Password" placeholder="password" >
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" type="button" id="LogIn" onclick="submitLogin()">Log In</button>
+          <button class="dropdown-item" type="button" id="SignUp" onclick="signUp()">Sign Up</button>
+          <!-- If Logged In -->
+          <button class="dropdown-item" type="button" id="CreatePage" onclick="createPageLink()" style="display: none;">Create Page</button>
+          <button class="dropdown-item example" type="button" id="SignOut" style="display: none;" onclick="logOut()">Sign Out</button>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Orders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-8 col-12">
+      <h4 class="mb-3"><strong>Billing address</strong></h4>
+      <form class="needs-validation" novalidate="">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">First name</label>
+            <input class="form-control" id="firstName" placeholder="" required="" type="text">
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Last name</label>
+            <input class="form-control" id="lastName" placeholder="" required="" type="text">
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email">Email <span class="text-muted">(Optional)</span></label>
+          <input class="form-control" id="email" placeholder="you@example.com" type="email">
+          <div class="invalid-feedback">
+            Please enter a valid email address for shipping updates.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address">Address</label>
+          <input class="form-control" id="address" placeholder="1234 Main St" required="" type="text">
+          <div class="invalid-feedback">
+            Please enter your shipping address.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+          <input class="form-control" id="address2" placeholder="Apartment or suite" type="text">
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Country</label>
+            <select class="custom-select d-block w-100" id="country" required="">
+              <option value="" selected="selected">Choose...</option>
+              <option>United States</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid country.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="state">State</label>
+            <select class="custom-select d-block w-100" id="state" required="">
+              <option value="" selected="selected">Choose...</option>
+              <option>California</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a valid state.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="zip">Zip</label>
+            <input class="form-control" id="zip" placeholder="" required="" type="text">
+            <div class="invalid-feedback">
+              Zip code required.
+            </div>
+          </div>
+        </div>
+        <hr class="mb-4">
+        <div class="custom-control custom-checkbox">
+          <input class="custom-control-input" id="same-address" type="checkbox">
+          <label class="custom-control-label" for="same-address">Shipping address is different than billing address</label>
+        </div>
+      </form>
+    </div>
+
+
+
+    <div class="col-md-4 col-12 mt-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+
+        <span><h4 class="mb-3"><strong>Your Cart</strong></h4></span>
+        <span class="badge badge-secondary badge-pill">3</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Book 1</h6>
+            <small class="text-muted">ISBN #</small>
+          </div>
+          <span class="text-muted">$12</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Book 2</h6>
+            <small class="text-muted">ISBN #</small>
+          </div>
+          <span class="text-muted">$8</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Book 3</h6>
+            <small class="text-muted">ISBN #</small>
+          </div>
+          <span class="text-muted">$5</span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total (USD)</span>
+          <strong>$20</strong>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+  <button class="btn btn-success btn-lg btn-block my-4" type="submit">Continue to checkout</button>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src='js/login.js'></script>
+<script src='js/loginpage.js'></script>
+</body>
+</html>
