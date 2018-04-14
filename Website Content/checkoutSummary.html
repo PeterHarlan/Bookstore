@@ -68,91 +68,8 @@
   </div>
 </nav>
 
-<div class="container my-4">
-  <div class="row">
-    <div class="col-md-8 col-12">
-      <h4 class="mb-3"><strong>Billing address</strong></h4>
-      <form class="needs-validation" novalidate="">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="firstName">First name</label>
-            <input class="form-control" id="firstName" placeholder="" required="" type="text">
-            <div class="invalid-feedback">
-              Valid first name is required.
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="lastName">Last name</label>
-            <input class="form-control" id="lastName" placeholder="" required="" type="text">
-            <div class="invalid-feedback">
-              Valid last name is required.
-            </div>
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="email">Email <span class="text-muted">(Optional)</span></label>
-          <input class="form-control" id="email" placeholder="you@example.com" type="email">
-          <div class="invalid-feedback">
-            Please enter a valid email address for shipping updates.
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="address">Address</label>
-          <input class="form-control" id="address" placeholder="1234 Main St" required="" type="text">
-          <div class="invalid-feedback">
-            Please enter your shipping address.
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-          <input class="form-control" id="address2" placeholder="Apartment or suite" type="text">
-        </div>
-
-        <div class="row">
-          <div class="col-md-5 mb-3">
-            <label for="country">Country</label>
-            <select class="custom-select d-block w-100" id="country" required="">
-              <option value="" selected="selected">Choose...</option>
-              <option>United States</option>
-            </select>
-            <div class="invalid-feedback">
-              Please select a valid country.
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="state">State</label>
-            <select class="custom-select d-block w-100" id="state" required="">
-              <option value="" selected="selected">Choose...</option>
-              <option>California</option>
-            </select>
-            <div class="invalid-feedback">
-              Please provide a valid state.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="zip">Zip</label>
-            <input class="form-control" id="zip" placeholder="" required="" type="text">
-            <div class="invalid-feedback">
-              Zip code required.
-            </div>
-          </div>
-        </div>
-        <hr class="mb-4">
-        <div class="custom-control custom-checkbox">
-          <input class="custom-control-input" id="same-address" type="checkbox">
-          <label class="custom-control-label" for="same-address">Shipping address is different than billing address</label>
-        </div>
-      </form>
-    </div>
-
-
-
-    <div class="col-md-4 col-12 mt-4">
+<div class="container my-3">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
-
         <span><h4 class="mb-3"><strong>Your Cart</strong></h4></span>
         <span class="badge badge-secondary badge-pill">3</span>
       </h4>
@@ -179,17 +96,40 @@
           <span class="text-muted">$5</span>
         </li>
 
+        <!-- Use SQL to inject the correct shipping selection into the field. Also use SQL to inject th ecorrect price and item cart number'-->
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Expressed Shipping</h6>
+            <small class="text-muted">Premium shipping in 2 days!</small>
+          </div>
+          <span class="text-muted">$15</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div id="expShip">
+            <h6 class="my-0">Expressed Shipping</h6>
+            <small class="text-muted">Premium shipping in 2 days!</small>
+          </div>
+          <span class="text-muted">$15</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Ground Shipping</h6>
+            <small class="text-muted">Longer shipping time but more economical</small>
+          </div>
+          <span class="text-muted">$5</span>
+        </li>
+
         <li class="list-group-item d-flex justify-content-between">
           <span>Total (USD)</span>
-          <strong>$20</strong>
+          <strong>$35</strong>
         </li>
       </ul>
-      
     </div>
-  </div>
-  <button class="btn btn-success btn-lg btn-block my-4" type="submit">Continue to checkout</button>
-</div>
-
+    <div class="container">
+      <p style="color: red">on click for the process to checkout button needs to be deleted and have php sent to next page. the link is there right now only for testing</p>
+              <button class="btn btn-success my-3 btn-block" onclick="location.href = 'thanks.html';" type="submit">Submit Order</button>
+    </div>
+    
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -197,5 +137,15 @@
 <script src="js/bootstrap.min.js"></script>
 <script src='js/login.js'></script>
 <script src='js/loginpage.js'></script>
+<script>
+  function hideDiv(y) {
+    var x = document.getElementById(y);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
 </body>
 </html>
