@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  
+
   <title>WKU Bookstore Sign Up</title>
 
   <!-- Bootstrap -->
@@ -19,68 +19,114 @@
 
   <!--Create custom javascript for this page-->
   <script type="text/javascript">
-      //a method that focus the user's cuser to the search box 
-      function getFocus()
-      {
-        document.getElementById("firstName").focus();
-      }
-    </script>
+    function getFocus()
+    {
+      document.getElementById("firstName").focus();
+    }
+  </script>
 
-    <!--Custom CSS-->
-    <!-- <style type="text/css"> </style> -->
+  <div class="d-flex align-items-start flex-column" style="height: 100vh">
+    <div style="width: 100%">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">WKU Books</a>
+      </nav>
+    </div>
 
-    <!--Search page conent flex from top of the screen to the bottom-->
-
-    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-      <a class="navbar-brand" href="index.html">WKU Books</a>
-    </nav>
-
-    <div class="container-fluid d-flex" style=" height: 100vh; ">
-      <!--Align the child container to the parent-->
-      <div class="container align-self-center">
-        <form>
-          <div class="form-group">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-6 offset-md-3" >
-                  <!--Heading-->
-                  <div class="mb-3"><h1><b>Sign Up</b></h1></div>
-                  <!--Name-->
-                  <div class="row ">
-                   <div class="col-md-6 mb-3">
-                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
+    <div class="d-flex container-fluid" style="height: 100%">
+      <div class="d-flex mx-auto my-auto">
+        <div class="container">
+          <div class="row">
+            <div class="col-8 offset-2">
+              <h3 class="display-3 mt-3"><strong>Sign Up</strong></h3>
+              <form>
+                <div class="form-row mt-3">
+                  <div class="col-6 mb-3">
+                    <input class="form-control" placeholder="First Name" required type="text">
+                    <div class="invalid-feedback">
+                      First name is required
+                    </div>
                   </div>
+
+                  <div class="col-6 mb-3">
+                    <input class="form-control" placeholder="Last Name" required type="text">
+                    <div class="invalid-feedback">
+                      First name is required
+                    </div>
+                  </div>
+
+                  <div class="col-6 mb-3">
+                    <input class="form-control" placeholder="Email" required type="text">
+                    <div class="invalid-feedback">
+                      email is required
+                    </div>
+                  </div>
+
+                  <div class="col-6 mb-3">
+                    <input class="form-control" placeholder="Phone Number" required type="text">
+                    <div class="invalid-feedback">
+                      Address 1 is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 mb-3">
+                    <input class="form-control" placeholder="Address 1" required type="text">
+                    <div class="invalid-feedback">
+                      Address 1 is required
+                    </div>
+                  </div>
+
+                  <div class="col-12 mb-3">
+                    <input class="form-control" placeholder="Password" required type="text">
+                    <div class="invalid-feedback">
+                      Password is required
+                    </div>
+                  </div>
+
+                  <div class="col-12 mb-3">
+                    <input class="form-control" placeholder="Password (re-typed)" required type="text">
+                    <div class="invalid-feedback">
+                      Password (re-typed) is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 mb-3">
+                    <input class="form-control" placeholder="Address 2" type="text">
+                  </div>
+
                   <div class="col-md-6 mb-3">
-                    <input type="text" class="form-control" id="lastName"  placeholder="Last Name">
+                    <input class="form-control" placeholder="City" required type="text">
+                    <div class="invalid-feedback">
+                      City name is required
+                    </div>
+                  </div>
+                  <div class="col-md-3 mb-3 ">
+                    <input class="form-control" placeholder="State" required type="text">
+                    <div class="invalid-feedback">
+                      State is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 mb-3">
+                    <input class="form-control" placeholder="Zip" required type="text">
+                    <div class="invalid-feedback">
+                      Zip code is required
+                    </div>
                   </div>
                 </div>
-                <!--email-->
-                <div class="form-group">
-                  <input type="email" class="form-control" id="email"  placeholder="Your email">
+                <div class="d-flex justify-content-end">
+                  <button class="btn btn-primary ml-3" type="submit">Save changes</button>
                 </div>
-                <!--Password-->
-                <div class="form-group">
-                  <input type="password" class="form-control" id="password"  placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control" id="confirmPassword"  placeholder="Confirm Password">
-                </div>
-                <!--Buttons-->
-                <!-- <button  class="btn btn-danger mx-auto d-block" type="button">Sign In</button> -->
-                <button type="button" class= "btn btn-success mx-auto d-block" onClick="submitReg()">Sign Up</button>
-              </div> <!--col-md-6 offset-md-3-->
-            </div><!--row-->
-          </div><!--container-->
-        </div><!--form-group-->
-      </form>
-    </div><!--container -->
-  </div><!--container-fluid-->
-  
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
-  <!--  Script that holds the submit registration Ajax JS Function-->
-  <script src='js/register.js'></script>
-</body>
-</html>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="js/bootstrap.min.js"></script>
+      <!--  Script that holds the submit registration Ajax JS Function-->
+      <script src='js/register.js'></script>
+    </body>
+    </html>

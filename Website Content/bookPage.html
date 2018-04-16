@@ -21,10 +21,6 @@
   <!--onload calls the java script when the webpage is loaded-->
   <body onload="getFocus()">
 
-    <!--Custom CSS-->
-  <style>
-  </style> 
-
 <!--Navigation-->
 <!--Add navbar-light bg-faded  to make navbar visiable-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -109,21 +105,10 @@
     <div class="p-2 col-12 col-md-3 order-3 order-md-4">
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between 1h-condensed"> 
-          <div>
-             <h6 class="my-0">
-            Product Price
-            </h6>
+          <div class="input-group">
+              <input type="text" class="form-control form-control-sm" placeholder="Quantity"> 
+              <span class="ml-2">@ $120.00</span>
           </div>
-          <span>$12.00</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between 1h-condensed"> 
-          <div>
-             <h6 class="my-0">
-              No Rush Shipping
-            </h6>
-            <small class="text-muted">5-7 Business Days</small>
-          </div>
-          <span>$3.95</span>
         </li>
         <li class="list-group-item d-flex justify-content-between 1h-condensed"> 
           <div>
@@ -131,7 +116,7 @@
               Total
             </h6>
           </div>
-          <strong>$15.95</strong>
+          <strong>$120.00</strong>
         </li>
       </ul>
       <button type="button" class="btn btn-success btn-lg btn-block mt-4">Buy Now!</button>
