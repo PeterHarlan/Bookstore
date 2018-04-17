@@ -1,3 +1,14 @@
+// Set vars so we can use data from database. Strip quotes from the results.
+-bookAuthor= JSON.stringify(bookdata["author"]).replace(/['"]+/g, '');
+-bookTitle= JSON.stringify(bookdata["title"]).replace(/['"]+/g, '');
+-bookIsbn= JSON.stringify(bookdata["isbn"]).replace(/['"]+/g, '');
+-bookNumber= JSON.stringify(bookdata["qty"]);
+-bookGenre= JSON.stringify(bookdata["Genre"]).replace(/['"]+/g, '');
+-bookPrice = JSON.stringify(bookdata["price"].toFixed(2)).replace(/['"]+/g, '');
+-bookImage = JSON.stringify(bookdata["Image_Address"]).replace(/['"]+/g, '');
+
+
+
 doctype html
 head
   meta(charset='utf-8')

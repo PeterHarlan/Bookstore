@@ -33,3 +33,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+//Page for specific book
+app.get('/bookPage:isbn', function (req, res) {
+    bookIsbn = req.params.isbn.slice(1);
+    let sql = 'SELECT * FROM Book WHERE ISBN = "' + bookIsbn + '"';
+    let query = db.query(sql, (err, results) => {
+        //if error or not found display results
+        if (err) throw err;
+        if (results[0] == undefined) {
+            res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
+        //else send bookdata to the page
+        } else {
+            res.render('bookpage', {
+                bookdata: results[0]
+                });
+        }
+    });
+});
