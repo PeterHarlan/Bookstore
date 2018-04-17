@@ -25,10 +25,10 @@ DB.connect((error) => {
 const app = express();
 app.use(express.static(__dirname));
 
-// Use Pug to render our HTML pages
+//Use Pug to render our HTML pages
 app.set('view engine', 'pug');
 
-// Body Parser for JSON-Encoded bodies
+//Body Parser for JSON-Encoded bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
