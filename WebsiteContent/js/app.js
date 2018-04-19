@@ -36,8 +36,9 @@ app.use(bodyParser.urlencoded({
 
 //Page for specific book
 app.get('/bookPage:isbn', function (req, res) {
+    console.log('hello');
     bookIsbn = req.params.isbn.slice(1);
-    let sql = 'SELECT * FROM Book WHERE ISBN = "' + bookIsbn + '"';
+    let sql = 'SELECT * FROM Book WHERE ISBN = "' + isbn + '"';
     let query = db.query(sql, (err, results) => {
         //if error or not found display results
         if (err) throw err;
@@ -45,9 +46,20 @@ app.get('/bookPage:isbn', function (req, res) {
             res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
         //else send bookdata to the page
         } else {
-            res.render('bookpage', {
+            res.render('bookPage', {
                 bookdata: results[0]
                 });
         }
     });
+});
+
+
+// Direct to "Page Not Found" page for any other routing or for errors
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
+});
+
+// Start server listening
+app.listen('3000', () => {
+    console.log('Server started on port 3000');
 });
