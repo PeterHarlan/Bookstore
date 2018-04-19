@@ -30,7 +30,7 @@
           <div class="row">
             <div class="col-md-8 offset-md-2">
               <h3 class="display-3 mb-3"><strong>Sign Up</strong></h3>
-              <form>
+              <form class="needs-validation" novalidate>
                 <div class="form-row mt-3">
                   <div class="col-sm-6 mb-3">
                     <input class="form-control" placeholder="First Name" required type="text">
@@ -42,28 +42,21 @@
                   <div class="col-sm-6 mb-3">
                     <input class="form-control" placeholder="Last Name" required type="text">
                     <div class="invalid-feedback">
-                      First name is required
+                      Last name is required
                     </div>
                   </div>
 
                   <div class="col-sm-6 mb-3">
                     <input class="form-control" placeholder="Email" required type="text">
                     <div class="invalid-feedback">
-                      email is required
+                      Email is required
                     </div>
                   </div>
 
                   <div class="col-sm-6 mb-3">
                     <input class="form-control" placeholder="Phone Number" required type="text">
                     <div class="invalid-feedback">
-                      Address 1 is required
-                    </div>
-                  </div>
-
-                  <div class="col-md-12 mb-3">
-                    <input class="form-control" placeholder="Address 1" required type="text">
-                    <div class="invalid-feedback">
-                      Address 1 is required
+                      Phone Number is required
                     </div>
                   </div>
 
@@ -78,6 +71,13 @@
                     <input class="form-control" placeholder="Password (re-typed)" required type="text">
                     <div class="invalid-feedback">
                       Password (re-typed) is required
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 mb-3">
+                    <input class="form-control" placeholder="Address 1" required type="text">
+                    <div class="invalid-feedback">
+                      Address 1 is required
                     </div>
                   </div>
 
@@ -106,6 +106,7 @@
                   </div>
                 </div>
                 <div class="d-flex justify-content-end">
+                  <!-- onclick="location.href='index.html'" -->
                   <button class="btn btn-success ml-3 mb-4" type="submit">Create Account</button>
                 </div>
               </form>
@@ -120,5 +121,6 @@
       <script src="js/bootstrap.min.js"></script>
       <!--  Script that holds the submit registration Ajax JS Function-->
       <script src='js/register.js'></script>
+      <script src='js/customFunctions.js'></script>
     </body>
     </html>

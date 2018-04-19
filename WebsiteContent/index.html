@@ -36,8 +36,11 @@
 
 <!--Navigation-->
 <!--Add navbar-light bg-faded  to make navbar visiable-->
+<div id="test">
+    
+  </div>
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-  <a class="navbar-brand" href="#">WKU Books</a>
+  <a class="navbar-brand" onclick="home()">WKU Books</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
   </button>
@@ -47,22 +50,40 @@
         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sign in
         </a>
-        <div class="dropdown-menu px-2" aria-labelledby="navbarDropdown">
-          <input  class="dropdown-item form-control mt-1" type="text" id="Email" placeholder="email">
-          <input  class="dropdown-item form-control my-1" type="password" id="Password" placeholder="password" >
-          <div class="dropdown-divider"></div>
-          <button class="dropdown-item" type="button" id="LogIn" onclick="submitLogin()">Log In</button>
-          <button class="dropdown-item" type="button" id="SignUp" onclick="signUp()">Sign Up</button>
-          <!-- If Logged In -->
-          <button class="dropdown-item" type="button" id="CreatePage" onclick="createPageLink()" style="display: none;">Create Page</button>
-          <button class="dropdown-item example" type="button" id="SignOut" style="display: none;" onclick="logOut()">Sign Out</button>
-        </div>
+        <form class="needs-validation" id="navLogIn" novalidate>
+          <div class="dropdown-menu px-2" aria-labelledby="navbarDropdown">
+            <!-- Not Log in -->
+            <div id="navNotLogIn">
+              <div class="form-group my-0">
+                <input  class="dropdown-item form-control mb-2" type="text" id="email" placeholder="email" required>
+                <div class="invalid-feedback">
+                  Input email
+                </div>
+              </div>
+              <div class="form-group my-0">
+                <input  class="dropdown-item form-control" type="password" id="password" placeholder="password" required>
+                <div class="invalid-feedback">
+                  Input password
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" type="submit">Log In</button>
+              <button class="dropdown-item" onclick="signUp()" type="button">Sign Up</button>
+            </div>
+            <!-- Log in -->
+            <div id="navIsLogIn" style="display: none">
+              <!-- Trigger command center if the user is an admin -->
+              <button class="dropdown-item" type="button" onclick="commandCenter()" id="commandCenter" style="display: none">Command Center</button>
+              <button class="dropdown-item" onclick="signOut()" type="button">Sign Out</button>
+            </div>
+          </div>
+        </form>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="#">Orders</a>
+        <a class="nav-link active" onclick="orderHistory()">Orders</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+        <a class="nav-link active" href="shoppingCart.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
       </li>
     </ul>
   </div>
@@ -72,7 +93,7 @@
 <div class="container-fluid d-flex homeImage" style=" height: 100vh;">
   <!--Align the child container to the parent-->
   <div class="container align-self-center">
-    <form name="search_box">
+    <form name="input_box_parent">
       <!-- Center the childern -->
       <center>
         <div class="container">
@@ -81,13 +102,13 @@
             <img src="img/search.png" class ="img-fluid col-md-6 offset-md-3 col-lg-8 offset-lg-2" alt="Search Image" >
             <!--Search Bar-->
             <div class="col-md-6 offset-md-3 col-lg-8 offset-lg-2">
-              <div class="input-group mt-3">
-                <input type="text" class="form-control" name = "search" placeholder="Search for...">
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">
-                    <i class="fa fa-search" aria-hidden="true"></i></button>
-                </span>
-              </div>
+            <div class="input-group mt-3">
+              <input type="text" class="form-control" name = "input_box_child" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button">
+                  <i class="fa fa-search" aria-hidden="true"></i></button>
+              </span>
+            </div>
             </div>
           </div>
         </div>
@@ -100,7 +121,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src='js/login.js'></script>
-<script src='js/loginpage.js'></script>
+<script src='js/customFunctions.js'></script>
 </body>
 </html>
