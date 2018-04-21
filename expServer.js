@@ -7,9 +7,9 @@ const session = require('express-session'); // Manages session variables
 
 //Create Mysql connection
 const DB = mysql.createConnection({
-    host: "den1.mssql6.gear.host",
+    host: "den1.mysql6.gear.host",
     user: "cs351book",
-    password: "Xy2r?axE_n7q",
+    password: "No9Zovx~1!Z5",
     database: "cs351book"
 });
 
