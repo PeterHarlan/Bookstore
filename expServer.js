@@ -9,7 +9,7 @@ const session = require('express-session'); // Manages session variables
 const DB = mysql.createConnection({
     host: "den1.mysql6.gear.host",
     user: "cs351book",
-    password: "No9Zovx~1!Z5",
+    password: "Zr7M!G7FV14!",
     database: "cs351book"
 });
 
@@ -22,53 +22,73 @@ DB.connect((error) => {
 });
 
 //Create Express object for server
-//const app = express();
-//app.use(express.static(__dirname));
+const app = express();
+app.use(express.static(__dirname));
 
 //Use Pug to render our HTML pages
-//app.set('view engine', 'pug');
-
-
-const app = express();
-
-app.get('/', (req, res) => { 
-    res.send('Hello World!');
-});
-
-//app.listen(3000, () => console.log('Example app listening on port 3000!'))
-
-
+app.set('view engine', 'pug');
 
 //Body Parser for JSON-Encoded bodies
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({
-//   extended: true
-//}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+   extended: true
+}));
+
+
+app.get('/book', function (req, res) {
+    res.sendFile(path.join(__dirname + '/links.html'));
+});
 
 //Page for specific book
-//app.get('/bookPage:isbn', function (req, res) {
-//   console.log('hello');
-//    bookIsbn = req.params.isbn.slice(1);
-//    let sql = 'SELECT * FROM Book WHERE ISBN = "' + isbn + '"';
-//    let query = db.query(sql, (err, results) => {
-//        //if error or not found display results
-//        if (err) throw err;
-//        if (results[0] == undefined) {
-//            res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
-//        //else send bookdata to the page
-//        } else {
-//            res.render('bookPage', {
-//                bookdata: results[0]
-//               });
-//        }
-//    });
-//});
+app.get('/bookPage:isbn', function (req, res) {
+    bookIsbn = req.params.isbn.slice(1);
+    let sql = 'SELECT * FROM books WHERE ISBN = ' + bookIsbn + ';';
+    let query = DB.query(sql, (err, results) => {
+        //if error or not found display results
+        if (err) throw err;
+        if (results[0] == undefined) {
+            res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
+        //else send book info to the page
+        } else {
+            res.render('bookPage', {
+                bookInfo: results[0]
+               });
+        }
+    });
+});
 
 
-// Direct to "Page Not Found" page for any other routing or for errors
-//app.get('/*', (req, res) => {
-//    res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
-//});
+//Search result page
+app.get('/searchRes:query', function (req, res) {
+    phrase = req.params.query.slice(1);
+    let sql = 'SELECT * FROM books ' +
+    'WHERE author LIKE "%' + phrase + '%" OR ' +
+    'title LIKE "%' + phrase + '%" OR ' +
+    'isbn LIKE "%' + phrase + '%" OR ' +
+    'pub LIKE "%' + phrase + '%"';
+
+    let query = DB.query(sql, (err, results) => {
+        //if error or not found display results
+        if (err) throw err;
+        if (results[0] == undefined) {
+            res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
+        //else send book info to the page
+        } else {
+            res.render('searchRes', {
+                books: results
+               });
+        }
+    });
+});
+
+
+app.post("/insertBook", function (req, res) {
+    console.log("hello");
+    console.log(req.body);
+    var title = req.body.bookTitle;
+    console.log(title);
+});
+
 
 // Start server listening
 app.listen('3000', () => {

@@ -1,0 +1,96 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='description' content='Buy your books at the WKU Bookstore')
+  meta(name='keywords' content='wku, bookstore, Western Kentucky University, college, bowling green, kentucky, ky, bg')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+  title WKU Bookstore
+  // Bootstrap
+  link(href='css/bootstrap.min.css' rel='stylesheet')
+  // Font Awesome
+  link(rel='stylesheet' href='css/font-awesome.min.css')
+// *********************************************
+// onload calls the java script when the webpage is loaded
+// Navigation
+// Add navbar-light bg-faded  to make navbar visiable
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  a.navbar-brand(href='index.html') WKU Books
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarNav.collapse.navbar-collapse.justify-content-end
+    ul.navbar-nav
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle.active(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+          | Sign in
+        .dropdown-menu.px-2(aria-labelledby='navbarDropdown')
+          input#Email.dropdown-item.form-control.mt-1(type='text' placeholder='email')
+          input#Password.dropdown-item.form-control.my-1(type='password' placeholder='password')
+          .dropdown-divider
+          button#LogIn.dropdown-item(type='button' onclick='submitLogin()') Log In
+          button#SignUp.dropdown-item(type='button' onclick='signUp()') Sign Up
+          // If Logged In
+          button#CreatePage.dropdown-item(type='button' onclick='createPageLink()' style='display: none;') Create Page
+          button#SignOut.dropdown-item.example(type='button' style='display: none;' onclick='logOut()') Sign Out
+      li.nav-item
+        a.nav-link.active(href='#') Orders
+      li.nav-item
+        a.nav-link.active(href='#')
+          i.fa.fa-shopping-cart(aria-hidden='true')
+// Search
+.container.mt-4.mb-3
+  img.img-fluid.col-md-6.offset-md-3.col-lg-8.offset-lg-2(src='img/search.png' alt='Search Image')
+  .input-group
+    input.form-control.hidden-sm(type='text' placeholder='Search for...')
+    span.input-group-btn
+      button.btn.btn-success(type='button')
+        i.fa.fa-search(aria-hidden='true')
+// Results
+- var i = 0;
+- while (books[i] != undefined) {
+    - var currentBook = books[i++]
+    .my-4
+    .container.mb-3
+        .row
+        .col-12.col-sm-4(align='center')
+            img.img-fluid(src=currentBook.img alt='Responsive image' style='max-height: 200px')
+        .col-12.col-sm-8.align-self-center
+            .container-fluid
+            .row
+                .col-12.my-3
+                a.heading(href='#') #{currentBook.title}
+                .col-12.col-md-6
+                div
+                    strong Price
+                    |  #{currentBook.price}
+                    | 
+                div
+                    strong ISBN
+                    |  #{currentBook.isbn}
+                    | 
+                div
+                    strong Pub
+                    |  #{currentBook.pub}
+                    | 
+                div
+                    strong Edition
+                    |  #{currentBook.ed}
+                    | 
+                .col-12.col-md-6
+                .input-group
+                    input.form-control.hidden-sm(type='text' placeholder='Quantity')
+                    span.input-group-btn
+                    button.btn.btn-secondary(type='button')
+                        i.fa.fa-plus(aria-hidden='true')
+                        |  Add to Cart
+                button.btn.btn-success.btn-lg.btn-block.mt-4(type='button')
+                    i.fa.fa-shopping-cart(aria-hidden='true')
+                    |  Check Out
+- }
+// jQuery (necessary for Bootstrap's JavaScript plugins)
+script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+script(src='js/bootstrap.min.js')
+script(src='js/login.js')
+script(src='js/loginpage.js')
