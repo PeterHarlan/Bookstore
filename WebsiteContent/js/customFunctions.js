@@ -55,7 +55,7 @@ function logIn()
 function isAdmin()
 {
   //If adimn == true
-    // toggleHide('commandCenter');
+     //toggleHide('commandCenter');
 }
 //Change button layout to display sign in buttons
 function signOut()
