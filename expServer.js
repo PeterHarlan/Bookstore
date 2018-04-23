@@ -85,7 +85,7 @@ app.get('/searchRes:query', function (req, res) {
 
 app.post("/insertBook", function (req, res) {
     console.log("Hello");
-    console.log(req.body);
+    console.log(req.body.authorName);
 
 });
 
