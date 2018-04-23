@@ -47,47 +47,50 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
       button.btn.btn-success(type='button')
         i.fa.fa-search(aria-hidden='true')
 // Results
-- var i = 0;
-- while (books[i] != undefined) {
-    - var currentBook = books[i++]
-    .my-4
-    .container.mb-3
+.my-4
+  - var i = 0;
+  - while (books[i] != undefined) {
+      - var currentBook = books[i++]
+      - if(i>1){
+        .container
+          hr
+      -}
+      .container.mb-3
         .row
-        .col-12.col-sm-4(align='center')
-            img.img-fluid(src=currentBook.img alt='Responsive image' style='max-height: 200px')
-        .col-12.col-sm-8.align-self-center
+          .col-12.col-sm-4(align='center')
+            img.img-fluid.border(src=currentBook.img alt='Responsive image' style='max-height: 200px')
+          .col-12.col-sm-8.align-self-center
             .container-fluid
-            .row
+              .row
                 .col-12.my-3
-                a.heading(href='http://localhost:3000/bookPage:' + currentBook.isbn) #{currentBook.title}
+                  a.heading(href='http://localhost:3000/bookPage:' + currentBook.isbn) #{currentBook.title}
                 .col-12.col-md-6
-                div
+                  div
                     strong Price
                     |  #{currentBook.price}
 
-                div
+                  div
                     strong ISBN
                     |  #{currentBook.isbn}
- 
-                div
+   
+                  div
                     strong Pub
                     |  #{currentBook.pub}
 
-                div
+                  .mb-2
                     strong Edition
                     |  #{currentBook.ed}
-
                 .col-12.col-md-6
-                .input-group
+                  .input-group
                     input.form-control.hidden-sm(type='text' placeholder='Quantity')
                     span.input-group-btn
                     button.btn.btn-secondary(type='button')
                         i.fa.fa-plus(aria-hidden='true')
                         |  Add to Cart
-                button.btn.btn-success.btn-lg.btn-block.mt-4(type='button')
-                    i.fa.fa-shopping-cart(aria-hidden='true')
-                    |  Check Out
-- }
+                    button.btn.btn-success.btn-lg.btn-block.mt-4(type='button')
+                      i.fa.fa-shopping-cart(aria-hidden='true')
+                      |  Check Out
+  - }
 // jQuery (necessary for Bootstrap's JavaScript plugins)
 script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
