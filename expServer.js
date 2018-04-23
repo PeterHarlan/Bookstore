@@ -7,9 +7,9 @@ const session = require('express-session'); // Manages session variables
 
 //Create Mysql connection
 const DB = mysql.createConnection({
-    host: "den1.mysql6.gear.host",
+    host: "den1.mysql5.gear.host",
     user: "cs351book",
-    password: "Zr7M!G7FV14!",
+    password: "Od70v439_NR!",
     database: "cs351book"
 });
 
@@ -84,15 +84,15 @@ app.get('/searchRes:query', function (req, res) {
 
 
 app.post("/insertBook", function (req, res) {
-    quantity = req.params.query.slice(1);
-    console.log(quantity);
+    console.log("Hello");
+    console.log(req.body);
 
 });
 
-app.get("/buyQty:qty", function (req, res) {
 
-    var title = req.body.bookTitle;
-    console.log(title);
+//Buy the book with passed isbn
+app.get("/buy:isbn", function (req, res) {
+    phrase = req.params.query.slice(1);
 });
 
 
