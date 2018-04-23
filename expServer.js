@@ -41,6 +41,7 @@ app.get('/book', function (req, res) {
 
 //Page for specific book
 app.get('/bookPage:isbn', function (req, res) {
+    console.log("Hello");
     bookIsbn = req.params.isbn.slice(1);
     let sql = 'SELECT * FROM books WHERE ISBN = ' + bookIsbn + ';';
     let query = DB.query(sql, (err, results) => {
@@ -83,8 +84,13 @@ app.get('/searchRes:query', function (req, res) {
 
 
 app.post("/insertBook", function (req, res) {
-    console.log("hello");
-    console.log(req.body);
+    quantity = req.params.query.slice(1);
+    console.log(quantity);
+
+});
+
+app.get("/buyQty:qty", function (req, res) {
+
     var title = req.body.bookTitle;
     console.log(title);
 });

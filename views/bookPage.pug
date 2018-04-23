@@ -68,14 +68,14 @@ html(lang="en")
           ul.list-group
             li.list-group-item.d-flex.justify-content-between.1h-condensed
               .input-group
-                input.form-control.form-control-sm(type="text" placeholder="Quantity")
+                input.form-control.form-control-sm(type="text" placeholder="Quantity" id="qty" action="http://localhost:3000/buyQty" name="qty")
                 span.ml-2 @ #{bookInfo.price}
             li.list-group-item.d-flex.justify-content-between.1h-condensed
               div
                 h6.my-0
                   | Total
               strong Total here
-          button.btn.btn-success.btn-lg.btn-block.mt-4(type="button") Buy Now!
+          button.btn.btn-success.btn-lg.btn-block.mt-4(type="button" value="submit" input="qty") Buy Now!
           .mt-4
             hr
             strong Specifications
