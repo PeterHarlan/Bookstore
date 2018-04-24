@@ -82,7 +82,6 @@ app.get('/searchRes:query', function (req, res) {
     });
 });
 
-<<<<<<< HEAD
 
 app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", function (req, res) {
     bookIsbn = req.params.isbn.slice(1);
@@ -104,11 +103,6 @@ app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", fu
                });
         }
     });
-=======
-app.post("/insertBook", function (req, res) {
-    console.log("Hello");
-    console.log(req.body.authorName);
->>>>>>> 5bbedb72319ed7ca5b3747b8a5c341423ed3f6f8
 
 });
 
