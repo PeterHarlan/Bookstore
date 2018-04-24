@@ -34,7 +34,6 @@ app.use(bodyParser.urlencoded({
    extended: true
 }));
 
-
 app.get('/book', function (req, res) {
     res.sendFile(path.join(__dirname + '/links.html'));
 });
@@ -57,7 +56,6 @@ app.get('/bookPage:isbn', function (req, res) {
         }
     });
 });
-
 
 //Search result page
 app.get('/searchRes:query', function (req, res) {
@@ -82,7 +80,6 @@ app.get('/searchRes:query', function (req, res) {
     });
 });
 
-
 app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", function (req, res) {
     bookIsbn = req.params.isbn.slice(1);
     let sql = 'SELECT * FROM books ' +
@@ -95,7 +92,7 @@ app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", fu
         //if error or not found display results
         if (err) throw err;
         if (results[0] == undefined) {
-            res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
+            res.sendFile(path.join(__dirname + 'error404.html'));
         //else send book info to the page
         } else {
             res.render('searchRes', {
