@@ -49,9 +49,9 @@ app.get('/bookPage:isbn', function (req, res) {
         if (results[0] == undefined) {
             res.sendFile(path.join(__dirname + '/error404.html'));
         //else send book info to the page
-        } else {
-            res.render('bookPage', {
-                bookInfo: results[0]
+        } else 
+{            res.render('bookPage', 
+{                bookInfo: results[0]
             });
         }
     });
