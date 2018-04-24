@@ -1,0 +1,16 @@
+.customtLgText {
+  font-size: 3rem;
+}
+@media only screen and (min-width: 768px) {
+  .customtLgText{
+    /*background-color: lightblue;*/
+    font-size: 5rem;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .customtLgText{
+    /*background-color: lightblue;*/
+    font-size: 7rem;
+  }
+}
+

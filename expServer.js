@@ -72,7 +72,7 @@ app.get('/searchRes:query', function (req, res) {
         //if error or not found display results
         if (err) throw err;
         if (results[0] == undefined) {
-            res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
+            res.sendFile(path.join(__dirname + '/error404.html'));
         //else send book info to the page
         } else {
             res.render('searchRes', {
@@ -82,6 +82,7 @@ app.get('/searchRes:query', function (req, res) {
     });
 });
 
+<<<<<<< HEAD
 
 app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", function (req, res) {
     bookIsbn = req.params.isbn.slice(1);
@@ -103,15 +104,18 @@ app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", fu
                });
         }
     });
+=======
+app.post("/insertBook", function (req, res) {
+    console.log("Hello");
+    console.log(req.body.authorName);
+>>>>>>> 5bbedb72319ed7ca5b3747b8a5c341423ed3f6f8
 
 });
-
 
 //Buy the book with passed isbn
 app.get("/buy:isbn", function (req, res) {
     phrase = req.params.query.slice(1);
 });
-
 
 // Start server listening
 app.listen('3000', () => {
