@@ -40,7 +40,6 @@ app.get('/book', function (req, res) {
 
 //Page for specific book
 app.get('/bookPage:isbn', function (req, res) {
-    console.log("Hello");
     bookIsbn = req.params.isbn.slice(1);
     let sql = 'SELECT * FROM books WHERE ISBN = ' + bookIsbn + ';';
     let query = DB.query(sql, (err, results) => {
@@ -81,25 +80,26 @@ app.get('/searchRes:query', function (req, res) {
 });
 
 app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", function (req, res) {
-    bookIsbn = req.params.isbn.slice(1);
-    let sql = 'SELECT * FROM books ' +
-    'WHERE author LIKE "%' + phrase + '%" OR ' +
-    'title LIKE "%' + phrase + '%" OR ' +
-    'isbn LIKE "%' + phrase + '%" OR ' +
-    'pub LIKE "%' + phrase + '%"';
+    title = req.params.title;
+    author = req.params.author;
+    imLink = req.params.imLink;
+    isbn = req.params.isbn.slice(1);
+    pub = req.params.pub;
+    ed = req.params.ed;
+    qty = req.params.qty;
+    qtyMin = req.params.qtyMin;
+    bPrice = req.params.bPrice;
+    descript = req.params.descript;
+
+    let sql = 'INSERT INTO books VALUES(isbn,title,author,qty,pub,ed,price,qtyMin,imLink,descript)';
 
     let query = DB.query(sql, (err, results) => {
         //if error or not found display results
         if (err) throw err;
-        if (results[0] == undefined) {
-            res.sendFile(path.join(__dirname + '/error404.html'));
-        //else send book info to the page
-        } else {
-            res.render('searchRes', {
-                books: results
-            });
-        }
+        console.log("Query attempted");
+        res.render('thanks');
     });
+
 });
 
 //Buy the book with passed isbn
