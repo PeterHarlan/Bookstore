@@ -21,7 +21,7 @@
 <!--*********************************************-->
 <!--onload calls the java script when the webpage is loaded-->
 
-<body onload="getFocus()">
+<body>
   <!--Navigation-->
   <!--Add navbar-light bg-faded  to make navbar visiable-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -59,28 +59,30 @@
     </div>
   </nav>
 
+
+
   <div class="container my-4">
-    <form class="needs-validation" novalidate action="/insertBook" method="post" id="insertB" name="input_box_parent">
+    <form class="needs-validation" novalidate>
       <div class="form-row">
         <!-- Book Title -->
         <div class="form-group col-12">
           <label for="bookTitle">Book Title</label>
-          <input class="form-control form-control-lg" id="bookTitle" type="text" placeholder="Book Title" required name="input_box_child">
+          <textarea class="form-control form-control-lg" id="bookTitle" type="text" placeholder="Book Title" required></textarea>
         </div>
         <!-- Image Link -->
         <div class="form-group col-12">
           <label for="imageLink">Image Link</label>
-          <input class="form-control form-control-sm" id="imageLink" type="text" placeholder="Image Link" required>
+          <textarea class="form-control form-control-sm" id="imageLink" type="text" placeholder="Image Link" required></textarea>
         </div>
         <!-- Author Name -->
         <div class="form-group col-sm-6">
           <label for="authorName">Author Name</label>
-          <input class="form-control form-control-sm" id="authorName" type="text" placeholder="Author" required>
+          <textarea class="form-control form-control-sm" id="authorName" type="text" placeholder="Author" required></textarea>
         </div>
         <!-- ISBN Number -->
         <div class="form-group col-sm-6">
           <label for="isbnNum">ISBN Number</label>
-          <input class="form-control form-control-sm" id="isbnNum" type="text" placeholder="ISBN Number" required>
+          <textarea class="form-control form-control-sm" id="isbnNum" type="text" placeholder="ISBN Number" required></textarea>
           <div class="invalid-feedback">
             Please provide a unique ISBN number
           </div>
@@ -91,22 +93,22 @@
         <!-- Publisher -->
         <div class="form-group col-sm-6">
           <label for="publisher">Publisher</label>
-          <input class="form-control form-control-sm" id="publisher" type="text" placeholder="Publisher" required>
+          <textarea class="form-control form-control-sm" id="publisher" type="text" placeholder="Publisher" required></textarea>
         </div>
         <!-- Edition -->
         <div class="form-group col-sm-6">
           <label for="edition">Edition</label>
-          <input class="form-control form-control-sm" id="edition" type="text" placeholder="Edition" required>
+          <textarea class="form-control form-control-sm" id="edition" type="text" placeholder="Edition" required></textarea>
         </div>
         <!-- Quantity -->
         <div class="form-group col-sm-6 col-md-4">
           <label for="quantity">Quantity</label>
-          <input class="form-control form-control-sm" id="quantity" type="text" placeholder="Quantity" required>
+          <textarea class="form-control form-control-sm" id="quantity" type="text" placeholder="Quantity" required></textarea>
         </div>
         <!-- Quantity Threshold -->
         <div class="form-group col-sm-6 col-md-4">
           <label for="quantityThreshold">Quantity Threshold</label>
-          <input class="form-control form-control-sm" id="quantityThreshold" type="text" placeholder="Quantity Threshold" required>
+          <textarea class="form-control form-control-sm" id="quantityThreshold" type="text" placeholder="Quantity Threshold" required></textarea>
         </div>
         <!-- Book Price -->
         <div class="form-group col-md-4">
@@ -115,7 +117,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
             </div>
-            <input class="form-control form-control-sm" id="bookPrice" type="text" placeholder="Book Price" required>
+            <textarea class="form-control form-control-sm" id="bookPrice" type="text" placeholder="Book Price" required></textarea>
           </div>
         </div>
         <div class="form-group col-12">
@@ -125,7 +127,7 @@
       </div>
       <div class="d-flex justify-content-end">
         <!-- add onClick() -->
-        <button class="btn btn-success ml-3 mb-4" type="submit">Add Book</button>
+        <button class="btn btn-success ml-3 mb-4" onclick="snatchData()">Add Book</button>
       </div>
     </form>
   </div>
@@ -140,10 +142,25 @@
   <script src='js/loginpage.js'></script>
   <script src='js/customFunctions.js'></script>
 
+  
   <script>
     function snatchData() {
-      var title = document.getElementById.value;
-      window.location = "/insertBook:" + title + "&" + "password... etc. etc."
+      console.log("HEllo");
+      var title = document.getElementById("bookTitle").value;
+      var author = document.getElementById("authorName").value;
+      var imLink = document.getElementById("imageLink").value;
+      var isbn = document.getElementById("isbnNum").value;
+      var pub = document.getElementById("publisher").value;
+      var ed = document.getElementById("edition").value;
+      var qty = document.getElementById("quantity").value;
+      var qtyMin = document.getElementById("quantityThreshold").value;
+      var bPrice = document.getElementById("bookPrice").value;
+      var descript = document.getElementById("bookDes").value;
+      var myLink = "/bookPage:" + isbn;
+      console.log(myLink);
+      window.location = myLink;
+      
+      //+"&"+title+"&"+author+"&"+pub+"&"+ed+"&"+qty+"&"+qtyMin+"&"+bPrice+"&"+imLink+"&"+descript);
     }
   </script>
 
