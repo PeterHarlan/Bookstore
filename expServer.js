@@ -83,9 +83,26 @@ app.get('/searchRes:query', function (req, res) {
 });
 
 
-app.post("/insertBook", function (req, res) {
-    console.log("Hello");
-    console.log(req.body.authorName);
+app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", function (req, res) {
+    bookIsbn = req.params.isbn.slice(1);
+    let sql = 'SELECT * FROM books ' +
+    'WHERE author LIKE "%' + phrase + '%" OR ' +
+    'title LIKE "%' + phrase + '%" OR ' +
+    'isbn LIKE "%' + phrase + '%" OR ' +
+    'pub LIKE "%' + phrase + '%"';
+
+    let query = DB.query(sql, (err, results) => {
+        //if error or not found display results
+        if (err) throw err;
+        if (results[0] == undefined) {
+            res.sendFile(path.join(__dirname + '/static/pagenotfound.html'));
+        //else send book info to the page
+        } else {
+            res.render('searchRes', {
+                books: results
+               });
+        }
+    });
 
 });
 
