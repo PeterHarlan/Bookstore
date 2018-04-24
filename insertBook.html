@@ -16,14 +16,12 @@
   <!-- Font Awesome-->
   <link rel="stylesheet" href="css/font-awesome.min.css">
 
-
-
-
 </head>
 
 <!--*********************************************-->
 <!--onload calls the java script when the webpage is loaded-->
 
+<body onload="getFocus()">
   <!--Navigation-->
   <!--Add navbar-light bg-faded  to make navbar visiable-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -62,56 +60,27 @@
   </nav>
 
   <div class="container my-4">
-<<<<<<< HEAD
-    <script>
-        function snatchData() {
-          var title = document.getElementById("bookTitle").value;
-          var author = document.getElementById("authorName").value;
-          var imLink = document.getElementById("imageLink").value;
-          var isbn = document.getElementById("isbnNum").value;
-          var pub = document.getElementById("publisher").value;
-          var ed = document.getElementById("edition").value;
-          var qty = document.getElementById("quantity").value;
-          var qtyMin = document.getElementById("quantityThreshold").value;
-          var bPrice = document.getElementById("bookPrice").value;
-          var descript = document.getElementById("bookDes").value;
-          var myLink = "http://localhost:3000/bookPage:" + isbn;
-          console.log(myLink);
-          window.location.assign(myLink);
-          
-          //+"&"+title+"&"+author+"&"+pub+"&"+ed+"&"+qty+"&"+qtyMin+"&"+bPrice+"&"+imLink+"&"+descript);
-        }
-    </script>
-
-
-    <form class="needs-validation" novalidate >
-=======
     <form class="needs-validation" novalidate action="/insertBook" method="post" id="insertB" name="input_box_parent">
->>>>>>> 5bbedb72319ed7ca5b3747b8a5c341423ed3f6f8
       <div class="form-row">
         <!-- Book Title -->
         <div class="form-group col-12">
           <label for="bookTitle">Book Title</label>
-<<<<<<< HEAD
-          <textarea class="form-control form-control-lg" id="bookTitle" type="text" placeholder="Book Title" required></textarea>
-=======
           <input class="form-control form-control-lg" id="bookTitle" type="text" placeholder="Book Title" required name="input_box_child">
->>>>>>> 5bbedb72319ed7ca5b3747b8a5c341423ed3f6f8
         </div>
         <!-- Image Link -->
         <div class="form-group col-12">
           <label for="imageLink">Image Link</label>
-          <textarea class="form-control form-control-sm" id="imageLink" type="text" placeholder="Image Link" required></textarea>
+          <input class="form-control form-control-sm" id="imageLink" type="text" placeholder="Image Link" required>
         </div>
         <!-- Author Name -->
         <div class="form-group col-sm-6">
           <label for="authorName">Author Name</label>
-          <textarea class="form-control form-control-sm" id="authorName" type="text" placeholder="Author" required></textarea>
+          <input class="form-control form-control-sm" id="authorName" type="text" placeholder="Author" required>
         </div>
         <!-- ISBN Number -->
         <div class="form-group col-sm-6">
           <label for="isbnNum">ISBN Number</label>
-          <textarea class="form-control form-control-sm" id="isbnNum" type="text" placeholder="ISBN Number" required></textarea>
+          <input class="form-control form-control-sm" id="isbnNum" type="text" placeholder="ISBN Number" required>
           <div class="invalid-feedback">
             Please provide a unique ISBN number
           </div>
@@ -122,22 +91,22 @@
         <!-- Publisher -->
         <div class="form-group col-sm-6">
           <label for="publisher">Publisher</label>
-          <textarea class="form-control form-control-sm" id="publisher" type="text" placeholder="Publisher" required></textarea>
+          <input class="form-control form-control-sm" id="publisher" type="text" placeholder="Publisher" required>
         </div>
         <!-- Edition -->
         <div class="form-group col-sm-6">
           <label for="edition">Edition</label>
-          <textarea class="form-control form-control-sm" id="edition" type="text" placeholder="Edition" required></textarea>
+          <input class="form-control form-control-sm" id="edition" type="text" placeholder="Edition" required>
         </div>
         <!-- Quantity -->
         <div class="form-group col-sm-6 col-md-4">
           <label for="quantity">Quantity</label>
-          <textarea class="form-control form-control-sm" id="quantity" type="text" placeholder="Quantity" required></textarea>
+          <input class="form-control form-control-sm" id="quantity" type="text" placeholder="Quantity" required>
         </div>
         <!-- Quantity Threshold -->
         <div class="form-group col-sm-6 col-md-4">
           <label for="quantityThreshold">Quantity Threshold</label>
-          <textarea class="form-control form-control-sm" id="quantityThreshold" type="text" placeholder="Quantity Threshold" required></textarea>
+          <input class="form-control form-control-sm" id="quantityThreshold" type="text" placeholder="Quantity Threshold" required>
         </div>
         <!-- Book Price -->
         <div class="form-group col-md-4">
@@ -146,7 +115,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
             </div>
-            <textarea class="form-control form-control-sm" id="bookPrice" type="text" placeholder="Book Price" required></textarea>
+            <input class="form-control form-control-sm" id="bookPrice" type="text" placeholder="Book Price" required>
           </div>
         </div>
         <div class="form-group col-12">
@@ -156,12 +125,10 @@
       </div>
       <div class="d-flex justify-content-end">
         <!-- add onClick() -->
-        <button class="btn btn-success ml-3 mb-4" onclick="snatchData()">Add Book</button>
+        <button class="btn btn-success ml-3 mb-4" type="submit">Add Book</button>
       </div>
     </form>
   </div>
-
-
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -173,6 +140,12 @@
   <script src='js/loginpage.js'></script>
   <script src='js/customFunctions.js'></script>
 
+  <script>
+    function snatchData() {
+      var title = document.getElementById.value;
+      window.location = "/insertBook:" + title + "&" + "password... etc. etc."
+    }
+  </script>
 
 </body>
 
