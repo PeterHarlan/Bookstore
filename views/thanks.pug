@@ -1,0 +1,64 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='Buy your books at the WKU Bookstore')
+    meta(name='keywords', content='wku, bookstore, Western Kentucky University, college, bowling green, kentucky, ky, bg')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    title WKU Bookstore
+    // Bootstrap
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    // Font Awesome
+    link(rel='stylesheet', href='css/font-awesome.min.css')
+    link(rel='stylesheet', href='css/custom.css')
+  // *********************************************
+  // onload calls the java script when the webpage is loaded
+  body(onload='getFocus()')
+    // Custom CSS
+    style.
+      .thankImage {
+      /* The image used */
+      background-image: url("img/thankImage.jpg");
+      /* Center and scale the image nicely */
+      background-position: 55% 0%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      }
+    .d-flex.align-items-start.flex-column(style='height: 100vh')
+      div(style='width: 100%')
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+          a.navbar-brand(href='index.html') WKU Books
+          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarNav.collapse.navbar-collapse.justify-content-end
+            ul.navbar-nav
+              li.nav-item.dropdown
+                a#navbarDropdown.nav-link.dropdown-toggle.active(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                  | Sign in
+                .dropdown-menu.px-2(aria-labelledby='navbarDropdown')
+                  input#Email.dropdown-item.form-control.mt-1(type='text', placeholder='email')
+                  input#Password.dropdown-item.form-control.my-1(type='password', placeholder='password')
+                  .dropdown-divider
+                  button#LogIn.dropdown-item(type='button', onclick='submitLogin()') Log In
+                  button#SignUp.dropdown-item(type='button', onclick='signUp()') Sign Up
+                  // If Logged In
+                  button#CreatePage.dropdown-item(type='button', onclick='createPageLink()', style='display: none;') Create Page
+                  button#SignOut.dropdown-item.example(type='button', style='display: none;', onclick='logOut()') Sign Out
+              li.nav-item
+                a.nav-link.active(href='#') Orders
+              li.nav-item
+                a.nav-link.active(href='#')
+                  i.fa.fa-shopping-cart(aria-hidden='true')
+      .d-flex.container-fluid.thankImage(style='height: 100%')
+        .d-flex.align-items-center.mx-auto(style='color: white')
+          div
+            p.customtLgText.text-center.mb-0(style='text-shadow: 2px 2px #606060', ;='')
+              #{statement}
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+    script(src='js/bootstrap.min.js')
+    script(src='js/login.js')
+    script(src='js/loginpage.js')

@@ -62,27 +62,27 @@
 
 
   <div class="container my-4">
-    <form class="needs-validation" novalidate>
+    <form class="needs-validation" novalidate method="post" action="/insert">
       <div class="form-row">
         <!-- Book Title -->
         <div class="form-group col-12">
           <label for="bookTitle">Book Title</label>
-          <input class="form-control form-control-lg" id="bookTitle" type="text" placeholder="Book Title" required></input>
+          <input class="form-control form-control-lg" id="bookTitle" type="text" placeholder="Book Title" name="title" required></input>
         </div>
         <!-- Image Link -->
         <div class="form-group col-12">
           <label for="imageLink">Image Link</label>
-          <input class="form-control form-control-sm" id="imageLink" type="text" placeholder="Image Link" required></input>
+          <input class="form-control form-control-sm" id="imageLink" type="text" placeholder="Image Link" name="imLink" required></input>
         </div>
         <!-- Author Name -->
         <div class="form-group col-sm-6">
           <label for="authorName">Author Name</label>
-          <input class="form-control form-control-sm" id="authorName" type="text" placeholder="Author" required></input>
+          <input class="form-control form-control-sm" id="authorName" type="text" placeholder="Author" name="author" required></input>
         </div>
         <!-- ISBN Number -->
         <div class="form-group col-sm-6">
           <label for="isbnNum">ISBN Number</label>
-          <input class="form-control form-control-sm" id="isbnNum" type="text" placeholder="ISBN Number" required></input>
+          <input class="form-control form-control-sm" id="isbnNum" type="text" placeholder="ISBN Number" name="isbn" required></input>
           <div class="invalid-feedback">
             Please provide a unique ISBN number
           </div>
@@ -93,22 +93,22 @@
         <!-- Publisher -->
         <div class="form-group col-sm-6">
           <label for="publisher">Publisher</label>
-          <input class="form-control form-control-sm" id="publisher" type="text" placeholder="Publisher" required></input>
+          <input class="form-control form-control-sm" id="publisher" type="text" placeholder="Publisher" name="pub" required></input>
         </div>
         <!-- Edition -->
         <div class="form-group col-sm-6">
           <label for="edition">Edition</label>
-          <input class="form-control form-control-sm" id="edition" type="text" placeholder="Edition" required></input>
+          <input class="form-control form-control-sm" id="edition" type="text" placeholder="Edition" name="ed" required></input>
         </div>
         <!-- Quantity -->
         <div class="form-group col-sm-6 col-md-4">
           <label for="quantity">Quantity</label>
-          <input class="form-control form-control-sm" id="quantity" type="text" placeholder="Quantity" required></input>
+          <input class="form-control form-control-sm" id="quantity" type="text" placeholder="Quantity" name="qty" required></input>
         </div>
         <!-- Quantity Threshold -->
         <div class="form-group col-sm-6 col-md-4">
           <label for="quantityThreshold">Quantity Threshold</label>
-          <input class="form-control form-control-sm" id="quantityThreshold" type="text" placeholder="Quantity Threshold" required></input>
+          <input class="form-control form-control-sm" id="quantityThreshold" type="text" placeholder="Quantity Threshold" name="qtyMin" required></input>
         </div>
         <!-- Book Price -->
         <div class="form-group col-md-4">
@@ -117,17 +117,17 @@
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
             </div>
-            <input class="form-control form-control-sm" id="bookPrice" type="text" placeholder="Book Price" required></input>
+            <input class="form-control form-control-sm" id="bookPrice" type="text" placeholder="Book Price" name="bPrice" required></input>
           </div>
         </div>
         <div class="form-group col-12">
           <label for="bookDes">Book Description</label>
-          <textarea class="form-control" id="bookDes" rows="3" placeholder="Book Description" required></textarea>
+          <textarea class="form-control" id="bookDes" rows="3" placeholder="Book Description" name="descript" required></textarea>
         </div>
       </div>
       <div class="d-flex justify-content-end">
         <!-- add onClick() -->
-        <button class="btn btn-success ml-3 mb-4" onclick="snatchData()">Add Book</button>
+        <button class="btn btn-success ml-3 mb-4">Add Book</button>
       </div>
     </form>
   </div>
@@ -143,10 +143,11 @@
   <script src='js/customFunctions.js'></script>
 
   
-  <script>
+  <!-- <script>
     function snatchData() {
       console.log("HEllo");
       var title = document.getElementById("bookTitle").value;
+      alert(bookTitle);
       var author = document.getElementById("authorName").value;
       var imLink = document.getElementById("imageLink").value;
       var isbn = document.getElementById("isbnNum").value;
@@ -162,7 +163,7 @@
       
       //+"&"+title+"&"+author+"&"+pub+"&"+ed+"&"+qty+"&"+qtyMin+"&"+bPrice+"&"+imLink+"&"+descript);
     }
-  </script>
+  </script> -->
 
 </body>
 

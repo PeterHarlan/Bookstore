@@ -3,53 +3,55 @@
 <title>HTML Tutorial</title>
 <body>
 
-    <script>
-            function snatchData() {
-
-                var title = document.getElementById("title").value;
-                var author = document.getElementById("author").value;
-                var imLink = encodeURIComponent(document.getElementById("imLink").value);
-                var isbn = document.getElementById("isbn").value;
-                var pub = document.getElementById("pub").value;
-                var ed = document.getElementById("ed").value;
-                var qty = document.getElementById("qty").value;
-                var qtyMin = document.getElementById("qtyMin").value;
-                var bPrice = document.getElementById("price").value;
-                var descript = document.getElementById("descript").value;
-
-                var myLink = "/insert:"+isbn+"&"+title+"&"+author+"&"+pub+"&"+ed+"&"+qty+"&"+qtyMin+"&"+bPrice+"&"+imLink+"&"+descript;
-                console.log(myLink);
-                window.location = myLink;
-                
-            }
-            </script>
-
- <form>
+ <form method="get" action="/insert">
   Title:<br>
-  <input type="text" name="title" id="title"><br>
+  <input type="text" name="title"><br>
   Author:<br>
-  <input type="text" name="author" id="author"><br>
+  <input type="text"><br>
   ISBN:<br>
-  <input type="text" name="isbn" id="isbn"><br>
+  <input type="text"><br>
   Publisher:<br>
-  <input type="text" name="pub" id="pub"><br>
+  <input type="text"><br>
   Edition:<br>
-  <input type="text" name="ed" id="ed"><br>
+  <input type="text"><br>
   Quantity:<br>
-  <input type="text" name="qty" id="qty"><br>
+  <input type="text"><br>
   Minimum Quantity:<br>
-  <input type="text" name="qtyMin" id="qtyMin"><br>
+  <input type="text"><br>
   Price:<br>
-  <input type="text" name="price" id="price"><br>
+  <input type="text"><br>
   Image Link:<br>
-  <input type="text" name="imLink" id="imLink"><br>
+  <input type="text"><br>
   Description:<br>
-  <input type="text" name="descript" id="descript"><br>
+  <input type="text"><br>
 
-   <button type="button" onclick="snatchData()">Submit</button> 
-</form> 
+   <input type="submit" value="Submit"><Br>
+</form>
 
-
+<form method="get" action="/bookPage">
+    Title:<br>
+    <input type="text"><br>
+    Author:<br>
+    <input type="text"><br>
+    ISBN:<br>
+    <input type="text" name="isbn"><br>
+    Publisher:<br>
+    <input type="text"><br>
+    Edition:<br>
+    <input type="text"><br>
+    Quantity:<br>
+    <input type="text"><br>
+    Minimum Quantity:<br>
+    <input type="text"><br>
+    Price:<br>
+    <input type="text"><br>
+    Image Link:<br>
+    <input type="text"><br>
+    Description:<br>
+    <input type="text"><br>
+  
+     <input type="submit" value="Submit"><Br>
+  </form>
 
 </body>
 </html> 

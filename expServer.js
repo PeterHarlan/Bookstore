@@ -79,30 +79,57 @@ app.get('/searchRes:query', function (req, res) {
     });
 });
 
-app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", function (req, res) {
-    title = req.params.title;
-    author = req.params.author;
-    imLink = req.params.imLink;
-    isbn = req.params.isbn.slice(1);
-    pub = req.params.pub;
-    ed = req.params.ed;
-    qty = req.params.qty;
-    qtyMin = req.params.qtyMin;
-    bPrice = req.params.bPrice;
-    descript = req.params.descript;
+app.post("/insert", function (req, res) {
 
+    title = req.body.title;
+    author = req.body.author;
+    img = req.body.imLink;
+    isbn = req.body.isbn;
+    pub = req.body.pub;
+    ed = req.body.ed;
+    qty = req.body.qty;
+    reorder = req.body.qtyMin;
+    price = req.body.bPrice;
+    descript = req.body.descript; 
 
+    console.log(title + " " + author + " " + img + " " + isbn + " " + pub + " " + ed + " " + qty + " " + reorder + " " + price + " " + descript);
     //Try "INSERT INTO books (isbn, title) VALUES ('12345', '7 habbits')
-    let sql = 'INSERT INTO books VALUES(isbn,title,author,qty,pub,ed,price,qtyMin,imLink,descript)';
+    let sql = 'INSERT INTO books (isbn, title, author, qty, pub, ed, price, reorder, img, descript)' +
+        'VALUES("'+isbn+'","'+title+'","'+author+'",'+qty+',"'+pub+'",'+ed+','+price+','+reorder+',"'+img+'","'+descript+'")';
 
     let query = DB.query(sql, (err, results) => {
         //if error or not found display results
         if (err) throw err;
-        console.log("Query attempted");
-        res.render('thanks');
+        var statement = 'The book "' + title + '" has been added to the store';
+        res.render('thanks', { statement });
     });
 
 });
+
+// app.post("/insert", function (req, res) {
+//     var username = req.body.username;
+//     var password = req.body.password;
+
+
+//     console.log("insertHello");
+//     let sql = "SELECT * FROM Manager WHERE UserName = '" + username + "' AND UserPassword = '" + password + "';"
+//     let query = db.query(sql, (err, results) => {
+//         if (err) {
+//             console.log(err);
+//             res.send("Login failed");
+//         } else if (Object.keys(results).length === 0)
+//             res.send("No user/password found.");
+//         else {
+//             req.session.managerusername = results[0]["Username"];
+//             req.session.managerfirstname = results[0]["FirstName"];
+//             req.session.managerlastname = results[0]["LastName"];
+//             req.session.save(); //save session variables
+
+//             //Then render the check stock page once logged in
+//             res.redirect("/checkstock");
+//         }
+//     });
+// });
 
 //Buy the book with passed isbn
 app.get("/buy:isbn", function (req, res) {
