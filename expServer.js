@@ -91,6 +91,8 @@ app.get("/insert:isbn&title&author&pub&ed&qty&qtyMin&bPrice&imLink&descript", fu
     bPrice = req.params.bPrice;
     descript = req.params.descript;
 
+
+    //Try "INSERT INTO books (isbn, title) VALUES ('12345', '7 habbits')
     let sql = 'INSERT INTO books VALUES(isbn,title,author,qty,pub,ed,price,qtyMin,imLink,descript)';
 
     let query = DB.query(sql, (err, results) => {
