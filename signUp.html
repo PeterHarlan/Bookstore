@@ -30,38 +30,38 @@
           <div class="row">
             <div class="col-md-8 offset-md-2">
               <h3 class="display-3 mb-3"><strong>Sign Up</strong></h3>
-              <form class="needs-validation" novalidate>
+              <form class="needs-validation" novalidate action="/newUser" method="post">
                 <div class="form-row mt-3">
                   <div class="col-sm-6 mb-3">
-                    <input class="form-control" placeholder="First Name" required type="text">
+                    <input class="form-control" placeholder="First Name" required type="text" name="fname">
                     <div class="invalid-feedback">
                       First name is required
                     </div>
                   </div>
 
                   <div class="col-sm-6 mb-3">
-                    <input class="form-control" placeholder="Last Name" required type="text">
+                    <input class="form-control" placeholder="Last Name" required type="text" name="lname">
                     <div class="invalid-feedback">
                       Last name is required
                     </div>
                   </div>
 
                   <div class="col-sm-6 mb-3">
-                    <input class="form-control" placeholder="Email" required type="text">
+                    <input class="form-control" placeholder="Email" required type="text" name="email">
                     <div class="invalid-feedback">
                       Email is required
                     </div>
                   </div>
 
                   <div class="col-sm-6 mb-3">
-                    <input class="form-control" placeholder="Phone Number" required type="text">
+                    <input class="form-control" placeholder="Phone Number" required type="text" name="phone">
                     <div class="invalid-feedback">
                       Phone Number is required
                     </div>
                   </div>
 
                   <div class="col-12 mb-3">
-                    <input class="form-control" placeholder="Password" required type="text">
+                    <input class="form-control" placeholder="Password" required type="text" name="password">
                     <div class="invalid-feedback">
                       Password is required
                     </div>
@@ -75,31 +75,31 @@
                   </div>
 
                   <div class="col-md-12 mb-3">
-                    <input class="form-control" placeholder="Address 1" required type="text">
+                    <input class="form-control" placeholder="Address 1" required type="text" name="street1">
                     <div class="invalid-feedback">
                       Address 1 is required
                     </div>
                   </div>
 
                   <div class="col-md-12 mb-3">
-                    <input class="form-control" placeholder="Address 2" type="text">
+                    <input class="form-control" placeholder="Address 2" type="text" name="street2">
                   </div>
 
                   <div class="col-md-6 mb-3">
-                    <input class="form-control" placeholder="City" required type="text">
+                    <input class="form-control" placeholder="City" required type="text" name="city">
                     <div class="invalid-feedback">
                       City name is required
                     </div>
                   </div>
                   <div class="col-md-3 mb-3 ">
-                    <input class="form-control" placeholder="State" required type="text">
+                    <input class="form-control" placeholder="State" required type="text" name="state">
                     <div class="invalid-feedback">
                       State is required
                     </div>
                   </div>
 
                   <div class="col-md-3 mb-3">
-                    <input class="form-control" placeholder="Zip" required type="text">
+                    <input class="form-control" placeholder="Zip" required type="text" name="zip">
                     <div class="invalid-feedback">
                       Zip code is required
                     </div>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="d-flex justify-content-end">
                   <!-- onclick="location.href='index.html'" -->
-                  <button class="btn btn-success ml-3 mb-4" type="submit">Create Account</button>
+                  <button class="btn btn-success ml-3 mb-4">Create Account</button>
                 </div>
               </form>
             </div>

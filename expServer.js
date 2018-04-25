@@ -79,8 +79,11 @@ app.get('/searchRes:query', function (req, res) {
     });
 });
 
+
+//Insert book function
 app.post("/insert", function (req, res) {
 
+    //Grab book information from post object
     title = req.body.title;
     author = req.body.author;
     img = req.body.imLink;
@@ -92,44 +95,101 @@ app.post("/insert", function (req, res) {
     price = req.body.bPrice;
     descript = req.body.descript; 
 
-    console.log(title + " " + author + " " + img + " " + isbn + " " + pub + " " + ed + " " + qty + " " + reorder + " " + price + " " + descript);
-    //Try "INSERT INTO books (isbn, title) VALUES ('12345', '7 habbits')
+    //Create query string
     let sql = 'INSERT INTO books (isbn, title, author, qty, pub, ed, price, reorder, img, descript)' +
         'VALUES("'+isbn+'","'+title+'","'+author+'",'+qty+',"'+pub+'",'+ed+','+price+','+reorder+',"'+img+'","'+descript+'")';
 
+    //Submit query to database
     let query = DB.query(sql, (err, results) => {
-        //if error or not found display results
+        //if error display results
         if (err) throw err;
+
+        //send completion statement to thank you page.
         var statement = 'The book "' + title + '" has been added to the store';
-        res.render('thanks', { statement });
+        res.render('thanks', { message: statement });
     });
 
 });
 
-// app.post("/insert", function (req, res) {
-//     var username = req.body.username;
-//     var password = req.body.password;
+
+//Insert book function
+app.post("/newUser", function (req, res) {
+
+    //Grab book information from post object
+    fname = req.body.fname;
+    lname = req.body.lname;
+    email = req.body.email;
+    password = req.body.password;
+
+    street1 = req.body.street1;
+    street2 = req.body.street2;
+    city = req.body.city;
+    state = req.body.state;
+    zip = req.body.zip;
+
+    phone = req.body.phone; 
+
+    //Create query string for user table
+    let userSQL = 'INSERT INTO users (fname,lname,login,password,email,manager)' +
+        'VALUES("'+fname+'","'+lname+'","'+email+'","'+password+'","'+email+'", false)';
+
+    //Submit insert user query to database
+    let userInsert = DB.query(userSQL, (err, userResults) => {
+        //if error display results
+        if (err) throw err;
+        else{
+            //Create insert address statement
+            let addressSQL = 'INSERT INTO addresses (aFname, aLname, street1, street2, city, st, zip)' +
+            'VALUES("'+fname+'","'+lname+'","'+street1+'","'+street2+'","'+city+'","'+state+'",'+zip+')';
+
+            //submit insert address query to database
+            let addressInsert = DB.query(addressSQL, (err, addressResults) => {
+                if (err) throw err;
+                else {
+                    //Find user ID and address ID to associate residence
+                    let findUS = "SELECT usID FROM users WHERE email="+mysql.escape(email)+" AND password="+mysql.escape(password)+";"
+                    let userIDquery = DB.query(findUS, (err, userID) => {
+                        if (err) throw err;
+                        else {
+
+                            let findAdd = 'SELECT aID FROM addresses WHERE street1="'+street1+'" AND zip='+zip;
+                            let addressIDquery = DB.query(findAdd, (err, addressID) => {
+                                //if error display results
+                                if (err) throw err;
+                                else {
+                                    console.log(userID[0].usID);
+                                    //create residence insert
+                                    let residenceSQL = 'INSERT INTO residence (userID, addID)' +
+                                    'VALUES('+userID[0].usID+','+addressID[0].aID+')';
+                                
+                                    //submit insert residence query to database
+                                    let residenceInsert = DB.query(residenceSQL, (err, residenceResults) => {
+                                        if (err) throw err;
+                                    });
 
 
-//     console.log("insertHello");
-//     let sql = "SELECT * FROM Manager WHERE UserName = '" + username + "' AND UserPassword = '" + password + "';"
-//     let query = db.query(sql, (err, results) => {
-//         if (err) {
-//             console.log(err);
-//             res.send("Login failed");
-//         } else if (Object.keys(results).length === 0)
-//             res.send("No user/password found.");
-//         else {
-//             req.session.managerusername = results[0]["Username"];
-//             req.session.managerfirstname = results[0]["FirstName"];
-//             req.session.managerlastname = results[0]["LastName"];
-//             req.session.save(); //save session variables
+                                    let phoneSQL = 'INSERT INTO phoneNums (userNum, phone)' +
+                                    'VALUES('+userID[0].usID+',"'+phone+'")';
+                                
+                                    //submit insert phone query to database
+                                    let phoneInsert = DB.query(phoneSQL, (err, phoneResults) => {
+                                        if (err) throw err;
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
 
-//             //Then render the check stock page once logged in
-//             res.redirect("/checkstock");
-//         }
-//     });
-// });
+
+    //send completion statement to thank you page.
+    var statement = 'The user "' + fname + " " + lname + '" has been added to the store';
+    res.render('thanks', { message: statement });
+
+});
 
 //Buy the book with passed isbn
 app.get("/buy:isbn", function (req, res) {
