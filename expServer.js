@@ -38,77 +38,142 @@ app.get('/book', function (req, res) {
     res.sendFile(path.join(__dirname + '/links.html'));
 });
 
-//Page for specific book
-app.get('/bookPage:isbn', function (req, res) {
-    bookIsbn = req.params.isbn.slice(1);
-    let sql = 'SELECT * FROM books WHERE ISBN = ' + bookIsbn + ';';
+// Stores sessions
+app.use(
+    session({
+        secret: "kahebnt8xcnwtkd7bnzoei2907vhsb23k50",
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            httpOnly: false
+        }
+    })
+);
+
+//Log out operation
+app.get('/logout', function (req, res) {
+    req.session.destroy(); // destroy all session variables
+    res.sendFile(path.join(__dirname + '/'));
+});
+
+
+// Login action for customers (POST, so there's no web page)
+app.post("/login", function (req, res) {
+    console.log(req.body);
+
+    var username = req.body.username;
+    var password = req.body.password;
+    console.log(username);
+
+    let sql = "SELECT * FROM users WHERE login='" + username + "' AND password='" + password + "';"
     let query = DB.query(sql, (err, results) => {
-        //if error or not found display results
-        if (err) throw err;
-        if (results[0] == undefined) {
-            res.sendFile(path.join(__dirname + '/error404.html'));
-        //else send book info to the page
-        } else 
-{            res.render('bookPage', 
-{                bookInfo: results[0]
-            });
+        if (err) {
+            console.log(err);
+            res.send("Login failed");
+        } else if (Object.keys(results).length === 0)
+            res.send("No user/password found.");
+        else {
+            console.log(results[0]["login"]);
+            req.session.username = results[0]["login"];
+            req.session.firstname = results[0]["fname"];
+            req.session.lastname = results[0]["lname"];
+            req.session.email = results[0]["email"];
+            req.session.authority = results[0]["manager"]
+
+
+            res.redirect("/");
         }
     });
 });
 
+
+//Page for specific book
+app.get('/bookPage:isbn', function (req, res) {
+    if (!req.session.username)
+    res.render('thanks', {
+        message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
+    });
+    else {
+        bookIsbn = req.params.isbn.slice(1);
+        let sql = 'SELECT * FROM books WHERE ISBN = ' + bookIsbn + ';';
+        let query = DB.query(sql, (err, results) => {
+            //if error or not found display results
+            if (err) throw err;
+            if (results[0] == undefined) {
+                res.sendFile(path.join(__dirname + '/error404.html'));
+            //else send book info to the page
+            } else {
+                res.render('bookPage', {
+                    bookInfo: results[0]
+                });
+            }
+        });
+    }
+});
+
 //Search result page
 app.get('/searchRes:query', function (req, res) {
-    phrase = req.params.query.slice(1);
-    let sql = 'SELECT * FROM books ' +
-    'WHERE author LIKE "%' + phrase + '%" OR ' +
-    'title LIKE "%' + phrase + '%" OR ' +
-    'isbn LIKE "%' + phrase + '%" OR ' +
-    'pub LIKE "%' + phrase + '%"';
-
-    let query = DB.query(sql, (err, results) => {
-        //if error or not found display results
-        if (err) throw err;
-        if (results[0] == undefined) {
-            res.sendFile(path.join(__dirname + '/error404.html'));
-        //else send book info to the page
-        } else {
-            res.render('searchRes', {
-                books: results
-            });
-        }
+    if (!req.session.username)
+    res.render('thanks', {
+        message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
     });
+    else {
+        phrase = req.params.query.slice(1);
+        let sql = 'SELECT * FROM books ' +
+        'WHERE author LIKE "%' + phrase + '%" OR ' +
+        'title LIKE "%' + phrase + '%" OR ' +
+        'isbn LIKE "%' + phrase + '%" OR ' +
+        'pub LIKE "%' + phrase + '%"';
+
+        let query = DB.query(sql, (err, results) => {
+            //if error or not found display results
+            if (err) throw err;
+            if (results[0] == undefined) {
+                res.sendFile(path.join(__dirname + '/error404.html'));
+            //else send book info to the page
+            } else {
+                res.render('searchRes', {
+                    books: results
+                });
+            }
+        });
+    }
 });
 
 
 //Insert book function
 app.post("/insert", function (req, res) {
-
-    //Grab book information from post object
-    title = req.body.title;
-    author = req.body.author;
-    img = req.body.imLink;
-    isbn = req.body.isbn;
-    pub = req.body.pub;
-    ed = req.body.ed;
-    qty = req.body.qty;
-    reorder = req.body.qtyMin;
-    price = req.body.bPrice;
-    descript = req.body.descript; 
-
-    //Create query string
-    let sql = 'INSERT INTO books (isbn, title, author, qty, pub, ed, price, reorder, img, descript)' +
-        'VALUES("'+isbn+'","'+title+'","'+author+'",'+qty+',"'+pub+'",'+ed+','+price+','+reorder+',"'+img+'","'+descript+'")';
-
-    //Submit query to database
-    let query = DB.query(sql, (err, results) => {
-        //if error display results
-        if (err) throw err;
-
-        //send completion statement to thank you page.
-        var statement = 'The book "' + title + '" has been added to the store';
-        res.render('thanks', { message: statement });
+    if (!req.session.authority || req.session.authority != 1)
+    res.render('thanks', {
+        message: "This function is for managers only.  Please log in with your manager account to continue"
     });
+    else {
+        //Grab book information from post object
+        title = req.body.title;
+        author = req.body.author;
+        img = req.body.imLink;
+        isbn = req.body.isbn;
+        pub = req.body.pub;
+        ed = req.body.ed;
+        qty = req.body.qty;
+        reorder = req.body.qtyMin;
+        price = req.body.bPrice;
+        descript = req.body.descript; 
 
+        //Create query string
+        let sql = 'INSERT INTO books (isbn, title, author, qty, pub, ed, price, reorder, img, descript)' +
+            'VALUES("'+isbn+'","'+title+'","'+author+'",'+qty+',"'+pub+'",'+ed+','+price+','+reorder+',"'+img+'","'+descript+'")';
+
+        //Submit query to database
+        let query = DB.query(sql, (err, results) => {
+            //if error display results
+            if (err) throw err;
+
+            //send completion statement to thank you page.
+            var statement = 'The book "' + title + '" has been added to the store';
+            res.render('thanks', { message: statement });
+        });
+    }
 });
 
 

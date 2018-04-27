@@ -38,10 +38,13 @@
             Sign in
           </a>
           <div class="dropdown-menu px-2" aria-labelledby="navbarDropdown">
-            <input class="dropdown-item form-control mt-1" type="text" id="Email" placeholder="email">
-            <input class="dropdown-item form-control my-1" type="password" id="Password" placeholder="password">
+            <form method="post" action="/login">
+            <input class="dropdown-item form-control mt-1" type="text" name="username" placeholder="email">
+            <input class="dropdown-item form-control my-1" type="password" name="password" placeholder="password">
             <div class="dropdown-divider"></div>
-            <button class="dropdown-item" type="button" id="LogIn" onclick="submitLogin()">Log In</button>
+            <button class="dropdown-item" type="submit" id="LogIn" onclick="logIn()">Log In</button>
+            </form>
+
             <button class="dropdown-item" type="button" id="SignUp" onclick="signUp()">Sign Up</button>
             <!-- If Logged In -->
             <button class="dropdown-item example" type="button" id="SignOut" style="display: none;" onclick="logOut()">Sign Out</button>
