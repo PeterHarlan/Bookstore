@@ -38,10 +38,11 @@ html(lang='en')
                 a#navbarDropdown.nav-link.dropdown-toggle.active(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                   | Sign in
                 .dropdown-menu.px-2(aria-labelledby='navbarDropdown')
-                  input#Email.dropdown-item.form-control.mt-1(type='text', placeholder='email')
-                  input#Password.dropdown-item.form-control.my-1(type='password', placeholder='password')
-                  .dropdown-divider
-                  button#LogIn.dropdown-item(type='button', onclick='submitLogin()') Log In
+                  form(method='post', action='/login')
+                    input.dropdown-item.form-control.mt-1(type='text', name='username', placeholder='email')
+                    input.dropdown-item.form-control.my-1(type='password', name='password', placeholder='password')
+                    .dropdown-divider
+                    button#LogIn.dropdown-item(type='submit', onclick='logIn()') Log In
                   button#SignUp.dropdown-item(type='button', onclick='signUp()') Sign Up
                   // If Logged In
                   button#CreatePage.dropdown-item(type='button', onclick='createPageLink()', style='display: none;') Create Page

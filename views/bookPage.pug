@@ -27,10 +27,11 @@ html(lang="en")
             a#navbarDropdown.nav-link.dropdown-toggle.active(href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
               | Sign in
             .dropdown-menu.px-2(aria-labelledby="navbarDropdown")
-              input#Email.dropdown-item.form-control.mt-1(type="text" placeholder="email")
-              input#Password.dropdown-item.form-control.my-1(type="password" placeholder="password")
-              .dropdown-divider
-              button#LogIn.dropdown-item(type="button" onclick="submitLogin()") Log In
+              form(method='post', action='/login')
+                input.dropdown-item.form-control.mt-1(type='text', name='username', placeholder='email')
+                input.dropdown-item.form-control.my-1(type='password', name='password', placeholder='password')
+                .dropdown-divider
+                button#LogIn.dropdown-item(type='submit', onclick='logIn()') Log In
               button#SignUp.dropdown-item(type="button" onclick="signUp()") Sign Up
               // If Logged In
               button#SignOut.dropdown-item.example(type="button" style="display: none;" onclick="logOut()") Sign Out
@@ -65,17 +66,18 @@ html(lang="en")
                 | Book Summary
             | #{bookInfo.descript}
         .p-2.col-12.col-md-3.order-3.order-md-4
-          ul.list-group
-            li.list-group-item.d-flex.justify-content-between.1h-condensed
-              .input-group
-                input.form-control.form-control-sm(type="text" placeholder="Quantity")
-                span.ml-2 @ #{bookInfo.price}
-            li.list-group-item.d-flex.justify-content-between.1h-condensed
-              div
-                h6.my-0
-                  | Total
-              strong Total here
-          button.btn.btn-success.btn-lg.btn-block.mt-4(type="button" href="http:localhost:3000/buy:#{bookInfo.isbn}") Buy Now!
+          form(method='post', action='/buy')
+            ul.list-group
+              li.list-group-item.d-flex.justify-content-between.1h-condensed
+                .input-group
+                  input.form-control.form-control-sm(type="text" placeholder="Quantity" name="qty")
+                  span.ml-2 @ #{bookInfo.price}
+              li.list-group-item.d-flex.justify-content-between.1h-condensed
+                div
+                  h6.my-0
+                    | Total
+                strong Total here
+            button.btn.btn-success.btn-lg.btn-block.mt-4(type="submit" ) Buy Now!
           .mt-4
             hr
             strong Specifications

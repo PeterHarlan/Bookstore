@@ -13,8 +13,6 @@ CREATE TABLE users (
 );
 
 
-
-
 CREATE TABLE residence (
     
 	userID int NOT NULL,
@@ -22,7 +20,6 @@ CREATE TABLE residence (
     
 	PRIMARY KEY  (userID, addID)
 );
-
 
 
 CREATE TABLE addresses (
@@ -60,9 +57,10 @@ CREATE TABLE orders (
 
 	oID int NOT NULL AUTO_INCREMENT,
 	buyer int NOT NULL,
-	address int NOT NULL,
-	expedited boolean NOT NULL,
-	payment char(16) NOT NULL,
+	address int,
+	expedited boolean,
+	payment char(16),
+	active boolean NOT NULL,
     
 	PRIMARY KEY (oID)
 );
@@ -90,6 +88,7 @@ CREATE TABLE orderList (
 
 	orderID int NOT NULL,
 	bookID varchar(13) NOT NULL,
+	orderQty int NOT NULL,
 	PRIMARY KEY  (orderID, bookID)
 
 );

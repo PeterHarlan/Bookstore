@@ -7,9 +7,9 @@ const session = require('express-session'); // Manages session variables
 
 //Create Mysql connection
 const DB = mysql.createConnection({
-    host: "den1.mysql5.gear.host",
+    host: "den1.mysql4.gear.host",
     user: "cs351book",
-    password: "Od70v439_NR!",
+    password: "Ou0ty0z8!0-Q",
     database: "cs351book"
 });
 
@@ -59,11 +59,8 @@ app.get('/logout', function (req, res) {
 
 // Login action for customers (POST, so there's no web page)
 app.post("/login", function (req, res) {
-    console.log(req.body);
-
     var username = req.body.username;
     var password = req.body.password;
-    console.log(username);
 
     let sql = "SELECT * FROM users WHERE login='" + username + "' AND password='" + password + "';"
     let query = DB.query(sql, (err, results) => {
@@ -73,13 +70,11 @@ app.post("/login", function (req, res) {
         } else if (Object.keys(results).length === 0)
             res.send("No user/password found.");
         else {
-            console.log(results[0]["login"]);
-            req.session.username = results[0]["login"];
+            req.session.user = results[0]["usID"];
             req.session.firstname = results[0]["fname"];
             req.session.lastname = results[0]["lname"];
             req.session.email = results[0]["email"];
             req.session.authority = results[0]["manager"]
-
 
             res.redirect("/");
         }
@@ -89,11 +84,11 @@ app.post("/login", function (req, res) {
 
 //Page for specific book
 app.get('/bookPage:isbn', function (req, res) {
-    if (!req.session.username)
-    res.render('thanks', {
+    if (!req.session.user){
+        res.render('thanks', {
         message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
     });
-    else {
+    } else {
         bookIsbn = req.params.isbn.slice(1);
         let sql = 'SELECT * FROM books WHERE ISBN = ' + bookIsbn + ';';
         let query = DB.query(sql, (err, results) => {
@@ -113,7 +108,7 @@ app.get('/bookPage:isbn', function (req, res) {
 
 //Search result page
 app.get('/searchRes:query', function (req, res) {
-    if (!req.session.username)
+    if (!req.session.user)
     res.render('thanks', {
         message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
     });
@@ -257,8 +252,47 @@ app.post("/newUser", function (req, res) {
 });
 
 //Buy the book with passed isbn
-app.get("/buy:isbn", function (req, res) {
-    phrase = req.params.query.slice(1);
+app.post("/buy", function (req, res) {
+    qty = req.body.qty;
+    user = req.session.user;
+    currentOrder = undefined;
+
+    //Select current user's active order
+    let orderQuery = 'SELECT oID FROM orders ' +
+        'WHERE buyer=' + user + ' AND active=true';
+
+    // if not active orders, create new and select ID
+    let selectOrder = DB.query(orderQuery, (err, results) => {
+        if (err) throw err;
+        if (results[0] == undefined) {
+
+            let createQuery = 'INSERT INTO orders (buyer,active)' +
+            'VALUES('+user+',true)';
+
+            
+            let createOrder = DB.query(createQuery, (err, results) => {
+                if (err) throw err;
+
+                let selectLast = DB.query('SELECT LAST_INSERT_ID()', (err,results) => {
+                    if (err) throw err;
+                    currentOrder = results[0]["LAST_INSERT_ID()"];
+
+                });
+            });
+        //Otherwise, assign current order to active order
+        } else { currentOrder = results[0]["oID"]; }
+
+
+        //Add book to order
+
+        let orderListQuery = 'INSERT INTO orderList(orderID, bookID, orderQty) ' +
+            'VALUES('+currentOrder+','+
+
+
+
+        
+    });
+
 });
 
 // Start server listening
