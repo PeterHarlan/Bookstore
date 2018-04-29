@@ -257,39 +257,40 @@ app.post("/newUser", function (req, res) {
 app.post("/buy", function (req, res) {
     qty = req.body.qty;
     user = req.session.user;
+    console.log(req.body.isbn);
     currentOrder = undefined;
 
-    //Select current user's active order
-    let orderQuery = 'SELECT oID FROM orders ' +
-        'WHERE buyer=' + user + ' AND active=true';
+    // //Select current user's active order
+    // let orderQuery = 'SELECT oID FROM orders ' +
+    //     'WHERE buyer=' + user + ' AND active=true';
 
-    // if not active orders, create new and select ID
-    let selectOrder = DB.query(orderQuery, (err, results) => {
-        if (err) throw err;
-        if (results[0] == undefined) {
+    // // if not active orders, create new and select ID
+    // let selectOrder = DB.query(orderQuery, (err, results) => {
+    //     if (err) throw err;
+    //     if (results[0] == undefined) {
 
-            let createQuery = 'INSERT INTO orders (buyer,active)' +
-            'VALUES('+user+',true)';
+    //         let createQuery = 'INSERT INTO orders (buyer,active)' +
+    //         'VALUES('+user+',true)';
 
             
-            let createOrder = DB.query(createQuery, (err, results) => {
-                if (err) throw err;
+    //         let createOrder = DB.query(createQuery, (err, results) => {
+    //             if (err) throw err;
 
-                let selectLast = DB.query('SELECT LAST_INSERT_ID()', (err,results) => {
-                    if (err) throw err;
-                    currentOrder = results[0]["LAST_INSERT_ID()"];
+    //             let selectLast = DB.query('SELECT LAST_INSERT_ID()', (err,results) => {
+    //                 if (err) throw err;
+    //                 currentOrder = results[0]["LAST_INSERT_ID()"];
 
-                });
-            });
-        //Otherwise, assign current order to active order
-        } else { currentOrder = results[0]["oID"]; }
+    //             });
+    //         });
+    //     //Otherwise, assign current order to active order
+    //     } else { currentOrder = results[0]["oID"]; }
 
 
-        //Add book to order
+    //     //Add book to order
 
-        // let orderListQuery = 'INSERT INTO orderList(orderID, bookID, orderQty) ' +
-        //     'VALUES('+currentOrder+',');   
-    });
+    //     // let orderListQuery = 'INSERT INTO orderList(orderID, bookID, orderQty) ' +
+    //     //     'VALUES('+currentOrder+',');   
+    // });
 
 });
 

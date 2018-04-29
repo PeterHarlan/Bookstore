@@ -71,6 +71,7 @@ html(lang="en")
               li.list-group-item.d-flex.justify-content-between.1h-condensed
                 .input-group
                   input.form-control.form-control-sm(type="text" placeholder="Quantity" name="qty")
+                  input#formISBN(type="text" name="isbn" style="display:none")
                   span.ml-2 @ #{bookInfo.price}
               li.list-group-item.d-flex.justify-content-between.1h-condensed
                 div
@@ -83,9 +84,9 @@ html(lang="en")
             strong Specifications
             .container-fluid
               .row
-                .col-4
-                  | ISBN:
                 .col-8
+                  | ISBN:
+                #ISBN.col-8
                   | #{bookInfo.isbn}
                 .col-4
                   | Pub.:
