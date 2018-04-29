@@ -107,13 +107,13 @@ app.get('/bookPage:isbn', function (req, res) {
 });
 
 //Search result page
-app.get('/searchRes:query', function (req, res) {
+app.post('/searchRes', function (req, res) {
     if (!req.session.user)
     res.render('thanks', {
         message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
     });
     else {
-        phrase = req.params.query.slice(1);
+        phrase = req.body.query;
         let sql = 'SELECT * FROM books ' +
         'WHERE author LIKE "%' + phrase + '%" OR ' +
         'title LIKE "%' + phrase + '%" OR ' +
