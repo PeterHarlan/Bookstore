@@ -66,8 +66,8 @@ function signOut()
 //Place the curser on the search box
 //The parent div must contain "name = 'input_box_parent'"
 //The child (input box) must contain "name = 'input_box_child;'"
-function getFocus()
+function getFocus(x)
 {
-  document.input_box_parent.input_box_child.focus();
+  document.getElementById(x).focus();
 }
 
