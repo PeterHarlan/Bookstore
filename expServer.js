@@ -62,6 +62,8 @@ app.post("/login", function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
+    console.log(req.body);
+
     let sql = "SELECT * FROM users WHERE login='" + username + "' AND password='" + password + "';"
     let query = DB.query(sql, (err, results) => {
         if (err) {
@@ -75,6 +77,8 @@ app.post("/login", function (req, res) {
             req.session.lastname = results[0]["lname"];
             req.session.email = results[0]["email"];
             req.session.authority = results[0]["manager"]
+
+            
 
             res.redirect("/");
         }
