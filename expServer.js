@@ -7,9 +7,9 @@ const session = require('express-session'); // Manages session variables
 
 //Create Mysql connection
 const DB = mysql.createConnection({
-    host: "den1.mysql4.gear.host",
+    host: "den1.mysql3.gear.host",
     user: "cs351book",
-    password: "Ou0ty0z8!0-Q",
+    password: "Zr7Mx47~Kl?b",
     database: "cs351book"
 });
 
@@ -261,41 +261,41 @@ app.post("/newUser", function (req, res) {
 app.post("/buy", function (req, res) {
     qty = req.body.qty;
     user = req.session.user;
-    console.log(req.body.isbn);
-    currentOrder = undefined;
+    isbn = req.body.isbn;
 
-    // //Select current user's active order
-    // let orderQuery = 'SELECT oID FROM orders ' +
-    //     'WHERE buyer=' + user + ' AND active=true';
+    //Select current user's active order
+    let orderQuery = 'SELECT oID FROM orders ' +
+        'WHERE buyer=' + user + ' AND active=true';
 
-    // // if not active orders, create new and select ID
-    // let selectOrder = DB.query(orderQuery, (err, results) => {
-    //     if (err) throw err;
-    //     if (results[0] == undefined) {
+    // if not active orders, create new and select ID
+    let selectOrder = DB.query(orderQuery, (err, results) => {
+        if (err) throw err;
+        if (results[0] == undefined) {
 
-    //         let createQuery = 'INSERT INTO orders (buyer,active)' +
-    //         'VALUES('+user+',true)';
-
+            let createQuery = 'INSERT INTO orders (buyer,active)' +
+            'VALUES('+user+',true)';
             
-    //         let createOrder = DB.query(createQuery, (err, results) => {
-    //             if (err) throw err;
+            let createOrder = DB.query(createQuery, (err, results) => {
+                if (err) throw err;
 
-    //             let selectLast = DB.query('SELECT LAST_INSERT_ID()', (err,results) => {
-    //                 if (err) throw err;
-    //                 currentOrder = results[0]["LAST_INSERT_ID()"];
+                let selectLast = DB.query('SELECT LAST_INSERT_ID()', (err,results) => {
+                    if (err) throw err;
+                    currentOrder = results[0]["LAST_INSERT_ID()"];
 
-    //             });
-    //         });
-    //     //Otherwise, assign current order to active order
-    //     } else { currentOrder = results[0]["oID"]; }
+                });
+            });
+        //Otherwise, assign current order to active order
+        } else { currentOrder = results[0]["oID"]; }
 
+        console.log(currentOrder);
+        //Add book to order
+        let orderListQuery = 'INSERT INTO orderList(orderID, bookID, orderQty) ' +
+            'VALUES('+currentOrder+',"'+isbn+'",'+qty+')';   
 
-    //     //Add book to order
-
-    //     // let orderListQuery = 'INSERT INTO orderList(orderID, bookID, orderQty) ' +
-    //     //     'VALUES('+currentOrder+',');   
-    // });
-
+        let addBookOrder = DB.query(orderListQuery, (err, results) => {
+            if (err) throw err;
+        });
+    });
 });
 
 // Start server listening
