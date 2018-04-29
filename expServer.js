@@ -285,12 +285,8 @@ app.post("/buy", function (req, res) {
 
         //Add book to order
 
-        let orderListQuery = 'INSERT INTO orderList(orderID, bookID, orderQty) ' +
-            'VALUES('+currentOrder+','+
-
-
-
-        
+        // let orderListQuery = 'INSERT INTO orderList(orderID, bookID, orderQty) ' +
+        //     'VALUES('+currentOrder+',');   
     });
 
 });
