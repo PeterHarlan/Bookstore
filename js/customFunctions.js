@@ -73,7 +73,10 @@ function getFocus(x)
 
 function getISBN()
 {
-  var innerISBN = document.getElementById("ISBN").innerHTML;
-  document.getElementById("formISBN").value = innerISBN;
+  var innerISBN = document.getElementById('ISBN').innerHTML;
+  var formISBN = document.getElementById('formISBN')
+  formISBN.value = innerISBN;
+  formISBN.classList.add("hidden");
+  getFocus("input");
 }
 

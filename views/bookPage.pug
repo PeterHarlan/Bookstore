@@ -12,9 +12,11 @@ html(lang="en")
     link(href="css/bootstrap.min.css" rel="stylesheet")
     // Font Awesome
     link(rel="stylesheet" href="css/font-awesome.min.css")
+    link(rel="stylesheet" href="css/custom.css")
+
   // *********************************************
   // onload calls the java script when the webpage is loaded
-  body(onload="getFocus()")
+  body(onload="getISBN()")
     // Navigation
     // Add navbar-light bg-faded  to make navbar visiable
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
@@ -42,9 +44,9 @@ html(lang="en")
               i.fa.fa-shopping-cart(aria-hidden="true")
     // Search
     .container.mt-4.mb-3
-      form(name="input_box_parent")
+      form
         .input-group
-          input.form-control.hidden-sm(type="text" name="input_box_child" placeholder="Search for...")
+          input.form-control.hidden-sm(type="text" id="input" placeholder="Search for...")
           span.input-group-btn
             button.btn.btn-success(type="button")
               i.fa.fa-search(aria-hidden="true")
@@ -71,7 +73,7 @@ html(lang="en")
               li.list-group-item.d-flex.justify-content-between.1h-condensed
                 .input-group
                   input.form-control.form-control-sm(type="text" placeholder="Quantity" name="qty")
-                  input#formISBN(type="text" name="isbn" style="display:none")
+                  input#formISBN(type="text" name="isbn")
                   span.ml-2 @ #{bookInfo.price}
               li.list-group-item.d-flex.justify-content-between.1h-condensed
                 div
