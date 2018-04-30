@@ -1,0 +1,259 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='description' content='Buy your books at the WKU Bookstore')
+  meta(name='keywords' content='wku, bookstore, Western Kentucky University, college, bowling green, kentucky, ky, bg')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+  title WKU Bookstore
+  // Bootstrap
+  link(href='css/bootstrap.min.css' rel='stylesheet')
+  // Font Awesome
+  link(rel='stylesheet' href='css/font-awesome.min.css')
+// *********************************************
+// onload calls the java script when the webpage is loaded
+// Navigation
+// Add navbar-light bg-faded  to make navbar visiable
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  a.navbar-brand(href='index.html') WKU Books
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarNav.collapse.navbar-collapse.justify-content-end
+    ul.navbar-nav
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle.active(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+          | Sign in
+        .dropdown-menu.px-2(aria-labelledby='navbarDropdown')
+          input#Email.dropdown-item.form-control.mt-1(type='text' placeholder='email')
+          input#Password.dropdown-item.form-control.my-1(type='password' placeholder='password')
+          .dropdown-divider
+          button#LogIn.dropdown-item(type='button' onclick='submitLogin()') Log In
+          button#SignUp.dropdown-item(type='button' onclick='signUp()') Sign Up
+          // If Logged In
+          button#CreatePage.dropdown-item(type='button' onclick='createPageLink()' style='display: none;') Create Page
+          button#SignOut.dropdown-item.example(type='button' style='display: none;' onclick='logOut()') Sign Out
+      li.nav-item
+        a.nav-link.active(href='#') Orders
+      li.nav-item
+        a.nav-link.active(href='#')
+          i.fa.fa-shopping-cart(aria-hidden='true')
+// Order Summary
+.container.my-4
+  h3.display-3.mb-3
+    strong Confirm Order
+  .row
+    .col-md-8.col-12.order-2.order-md-1
+      .card
+        .card-header
+          h4
+            strong Shipping Address
+        .card-body
+        - var i = 0;
+        - while (addresses[i] != undefined) {
+        - address=addresses[i++];
+          // Default Address, minimum one required
+          .custom-control.custom-radio
+            input#shipAdd1.custom-control-input(type='radio' name='customRadio' checked='')
+            label.custom-control-label(for='shipAdd1')
+              strong #{address.aFname} #{address.aLname}
+              |  #{address.street1}, #{address.city}, #{address.state} #{address.zip} 
+              | 
+              a(href='#') edit
+              -}
+          button.btn.btn-primary.btn-sm.mt-3(type='button' data-toggle='modal' data-target='#exampleModal') Add Address
+        // Card body
+      // Card
+      .form-check.my-3
+        input#sameAddCheck.form-check-input(type='checkbox' value='' onchange="togleHide('billingDiv')")
+        label.form-check-label(for='sameAddCheck')
+          | Billing same as shipping
+      #billingDiv.card
+        .card-header
+          h4
+            strong Billing Address
+        .card-body
+        - var j = 0;
+        - while (addresses[j] != undefined) {
+        - address=addresses[j++];
+          // Default Address, minimum one required
+          .custom-control.custom-radio
+            input#billAdd1.custom-control-input(type='radio' name='customRadiob' checked='')
+            label.custom-control-label(for='billAdd1')
+              strong #{address.aFname} #{address.aLname}
+              |  #{address.street1}, #{address.city}, #{address.state} #{address.zip} 
+              | 
+              a(href='#') edit
+              -}
+          // Additional Address, not required
+          .custom-control.custom-radio
+            input#billAdd2.custom-control-input(type='radio' name='customRadiob')
+            label.custom-control-label(for='billAdd2')
+              strong Joe Mama
+              |  555 Valleybottomer Dr., Bowling Green, KY 42101
+              a(href='#') edit
+          button.btn.btn-primary.btn-sm.mt-3(type='button' data-toggle='modal' data-target='#exampleModal') Add Address
+        // Card body
+      // Card
+      #shipSelect.card.mt-3
+        .card-header
+          h4
+            strong Shipping Type
+        .card-body
+          .container-fluid
+            .row
+              .custom-control.custom-radio.col-8.col-sm-10
+                input#shipOpt1.custom-control-input(type='radio' name='shipType' checked='')
+                label.custom-control-label(for='shipOpt1')
+                  strong Standard No-Rush Shipping
+                  |  - Save money but 5-7 day shipping
+              .col-4.col-sm-2
+                strong $5
+              // Additional Address, not required
+              .custom-control.custom-radio.col-8.col-sm-10
+                input#shipOpt2.custom-control-input(type='radio' name='shipType')
+                label.custom-control-label(for='shipOpt2')
+                  strong Lightning Quick Shipping
+                  |  - Guaranteed 2-3 day shipping
+              .col-4.col-sm-2
+                strong $10
+        // Card body
+      // Card
+      .card.mt-3
+        .card-header
+          h4
+            strong Payment
+        .card-body
+          form
+            .form-row
+              .col-md-6.mb-3
+                label(for='cc-name') Name on card
+                input#cc-name.form-control(placeholder='' required='' type='text')
+                small.text-muted Full name as displayed on card
+                .invalid-feedback
+                  | Name on card is required
+              .col-md-6.mb-3
+                label(for='cc-number') Credit card number
+                input#cc-number.form-control(placeholder='' required='' type='text')
+                .invalid-feedback
+                  | Credit card number is required
+              .col-md-3.mb-3
+                label(for='cc-expiration') Expiration
+                input#cc-expiration.form-control(placeholder='' required='' type='text')
+                .invalid-feedback
+                  | Expiration date required
+              .col-md-3.mb-3
+                label(for='cc-cvv') CVV
+                input#cc-cvv.form-control(placeholder='' required='' type='text')
+                .invalid-feedback
+                  | Security code required
+              .col-md-6
+                .custom-control.custom-radio
+                  input#credit.custom-control-input(name='paymentMethod' checked='checked' required='' type='radio')
+                  label.custom-control-label(for='credit') Credit card
+                .custom-control.custom-radio
+                  input#debit.custom-control-input(name='paymentMethod' required='' type='radio')
+                  label.custom-control-label(for='debit') Debit card
+                .custom-control.custom-radio
+                  input#paypal.custom-control-input(name='paymentMethod' required='' type='radio')
+                  label.custom-control-label(for='paypal') PayPal
+              p(style='color: red')
+                | on click for the process to checkout button needs to be deleted and have php sent to next page. the link is there right now only for testing
+              button.btn.btn-success.mt-3.btn-block(onclick="location.href = 'thanks.html';" type='submit')
+                i.fa.fa-shopping-bag(aria-hidden='true')
+                |  Confirm and Place Order
+        // Card body
+      // Card
+      // Modal for the pop up button for add address
+      #exampleModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addModalLabel' aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#addModalLabel.modal-title New Address
+              button.close(type='button' data-dismiss='modal' aria-label='Close')
+            .modal-body
+              form
+                .form-row
+                  .col-md-6.mb-3
+                    label(for='cc-name') First name
+                    input.form-control(placeholder='FirstName' required='' type='text' value='Peter')
+                    small.text-muted First name on address
+                    .invalid-feedback
+                      | First name is required
+                  .col-md-6.mb-3
+                    label(for='cc-number') Last name
+                    input.form-control(placeholder='LastName' required='' type='text' value='Harlan')
+                    .invalid-feedback
+                      | Last name is required
+                  .col-md-12.mb-3
+                    label Address 1
+                    input.form-control(placeholder='Address 1' required='' type='text')
+                    .invalid-feedback
+                      | Address 1 is required
+                  .col-md-12.mb-3
+                    label Address 2
+                    input.form-control(placeholder='Address 2' type='text')
+                  .col-md-6.mb-3
+                    label City
+                    input.form-control(placeholder='City' required='' type='text')
+                    .invalid-feedback
+                      | City name is required
+                  .col-md-3.mb-3
+                    label State
+                    input.form-control(placeholder='State' required='' type='text')
+                    .invalid-feedback
+                      | State is required
+                  .col-md-3.mb-3
+                    label Zip Code
+                    input.form-control(placeholder='Zip' required='' type='text')
+                    .invalid-feedback
+                      | Zip code is required
+                .d-flex.justify-content-end
+                  button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                  button.btn.btn-primary.ml-3(type='submit') Save changes
+    // Row one
+    .col-md-4.col-12.order-1.order-md-2
+      h4.d-flex.justify-content-between.align-items-center.mb-3
+        span
+          strong
+            i.fa.fa-shopping-cart(aria-hidden='true')
+            |  Your Cart
+        span.badge.badge-secondary.badge-pill 3
+      ul.list-group.mb-3
+        li.list-group-item.d-flex.justify-content-between.lh-condensed
+          div
+            h6.my-0 Book 1
+            small.text-muted ISBN #
+            .input-group
+              input.form-control.form-control-sm(type='text' placeholder='Quantity')
+              span.ml-2 @ $4 each
+          span.text-muted $12
+        li.list-group-item.d-flex.justify-content-between.lh-condensed
+          div
+            h6.my-0 Book 2
+            small.text-muted ISBN #
+            .input-group
+              input.form-control.form-control-sm(type='text' placeholder='Quantity')
+              span.ml-2 @ $2 each
+          span.text-muted $8
+        li.list-group-item.d-flex.justify-content-between.lh-condensed
+          div
+            h6.my-0 Book 3
+            small.text-muted ISBN #
+            .input-group
+              input.form-control.form-control-sm(type='text' placeholder='Quantity')
+              span.ml-2 @ $5 each
+          span.text-muted $5
+        li.list-group-item.d-flex.justify-content-between
+          span Total (USD)
+          strong $35
+    // Row 2
+  // Row
+// Container
+// jQuery (necessary for Bootstrap's JavaScript plugins)
+script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+script(src='js/bootstrap.min.js')
+script(src='js/login.js')
+script(src='js/loginpage.js')
+script(src='js/customFunctions.js')
