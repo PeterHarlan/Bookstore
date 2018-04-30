@@ -66,7 +66,6 @@ app.post("/login", function (req, res) {
 
     let sql = 'SELECT * FROM users WHERE login=' + mysql.escape(username) + ' AND password="' + password + '"';
 
-    console.log(sql);
     let query = DB.query(sql, (err, results) => {
         if (err) {
             console.log(err);
@@ -153,7 +152,7 @@ app.get('/shoppingCart:usID', function (req, res) {
 
 
 //Page for specific book
-app.get('/checkoutSummary:user', function (req, res) {
+app.get('/shgipPayment:subTotal', function (req, res) {
     if (!req.session.user){
         res.render('thanks', {
         message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
@@ -168,9 +167,9 @@ app.get('/checkoutSummary:user', function (req, res) {
                 res.sendFile(path.join(__dirname + '/error404.html'));
             //else send book info to the page
             } else {
-                res.render('checkoutSummary', {
+                res.render('shipPayment', {
                     addresses: results,
-                    user: req.session.user
+                    subtotal: req.params.subTotal.slice(1)
                 });
             }
         });

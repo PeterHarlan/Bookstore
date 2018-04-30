@@ -57,6 +57,7 @@ html(lang='en')
                   - var i = 0;
                   - while (bookInfo[i] != undefined) {
                   - var currentBook = bookInfo[i++];
+                  - var subTotal = subTotal + currentBook.price;
                   
                   li.list-group-item.d-flex.justify-content-between.lh-condensed
                     div
@@ -73,7 +74,7 @@ html(lang='en')
                     span Total (USD)
                     #totalPrice.strong
                   // onclick call shipPayment()
-                button.btn.btn-success.mt-3.btn-block(type='button')
+                button.btn.btn-success.mt-3.btn-block(href='/shipPayment:'+subTotal)
                   i.fa.fa-shopping-cart(aria-hidden='true')
                   |  Order Details!
     // Container
