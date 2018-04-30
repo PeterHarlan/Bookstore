@@ -64,10 +64,8 @@ html(lang='en')
                     div
                       h6.my-0 #{currentBook.title}
                       small.text-muted ISBN # #{currentBook.isbn}
-                          
                         .input-group
                           input.form-control.form-control-sm(type='text', placeholder='Quantity', required value=""+currentBook.orderQty)
-
                           span.ml-2 @ $#{currentBook.price}  each
                     span.text-muted #{bookTotal}
                   - }
