@@ -80,3 +80,31 @@ function getISBN()
   getFocus("input");
 }
 
+function changeTotal() {
+    //Grabs all the input box fields, later used to extract the quantity of books
+    var qtnValue = document.getElementsByClassName("qtnValue");
+    //Grabs all element with the class bookPrice that holds the bookprice
+    var price = document.getElementsByClassName("bookPrice");
+    //Grabs all elements that currently holds the calculated prices
+    var oldCalPrice = document.getElementsByClassName("calPrice");
+    // Holds the total quantity inserted into the badge
+    var totalQtn = Number(0);
+    // Create a new array that will hold the calculated prices for each book 
+    var calPrice = new Array();
+    // Holds the total price of everything
+    var totalPrice = Number(0);
+
+    for (i = 0; i < qtnValue.length; i++) {
+      // Calculates the total quantity 
+      totalQtn += Number(qtnValue[i].value);
+      // Calculates the price per book and stores it into the calPrice array
+      calPrice.push(Number(qtnValue[i].value)*Number(price[i].value));
+      // Update the totalPrice with the calPrice 
+      totalPrice += calPrice[i];
+      //Inser the newly calculated price the price field with fixed decimal points of two
+      oldCalPrice[i].innerHTML = calPrice[i].toFixed(2);
+    }
+
+    document.getElementById("totalQtn").innerHTML = totalQtn;
+    document.getElementById("totalPrice").innerHTML = totalPrice.toFixed(2);;
+}
