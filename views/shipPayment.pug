@@ -51,20 +51,15 @@ html(lang='en')
                 strong Shipping Address
             .card-body
               // Default Address, minimum one required
+            - var i = 0;
+            - while (addresses[i] != undefined) {
+            - address=addresses[i++];
               .custom-control.custom-radio
                 input#shipAdd1.custom-control-input(type='radio', name='customRadio', checked='')
                 label.custom-control-label(for='shipAdd1')
-                  strong Peter Harlan
-                  |  1256 Easy Street, Bowling Green, KY 42101
-                  a(href='#') edit
-              // Additional Address, not required
-              .custom-control.custom-radio
-                input#shipAdd2.custom-control-input(type='radio', name='customRadio')
-                label.custom-control-label(for='shipAdd2')
-                  strong Joe Mama
-                  |  888 Hilltopper Dr., Bowling Green, KY 42101
-                  a(href='#') edit
-              button.btn.btn-primary.btn-sm.mt-3(type='button', data-toggle='modal', data-target='#exampleModal') Add Address
+                  strong #{address.aFname} #{address.aLname}
+                  |  #{address.street1}, #{address.city}, #{address.st} #{address.zip}
+            - }
             // Card body
           // Card
           .form-check.my-3
@@ -77,20 +72,15 @@ html(lang='en')
                 strong Billing Address
             .card-body
               // Default Address, minimum one required
+            - var i = 0;
+            - while (addresses[i] != undefined) {
+            - address=addresses[i++];
               .custom-control.custom-radio
-                input#billAdd1.custom-control-input(type='radio', name='customRadiob', checked='')
-                label.custom-control-label(for='billAdd1')
-                  strong Peter Harlan
-                  |  321 Hard Street, Bowling Green, KY 42101
-                  a(href='#') edit
-              // Additional Address, not required
-              .custom-control.custom-radio
-                input#billAdd2.custom-control-input(type='radio', name='customRadiob')
-                label.custom-control-label(for='billAdd2')
-                  strong Joe Mama
-                  |  555 Valleybottomer Dr., Bowling Green, KY 42101
-                  a(href='#') edit
-              button.btn.btn-primary.btn-sm.mt-3(type='button', data-toggle='modal', data-target='#exampleModal') Add Address
+                input#shipAdd1.custom-control-input(type='radio', name='customRadio', checked='')
+                label.custom-control-label(for='shipAdd1')
+                  strong #{address.aFname} #{address.aLname}
+                  |  #{address.street1}, #{address.city}, #{address.st} #{address.zip}
+            - }
             // Card body
           // Card
           #shipSelect.card.mt-3
@@ -116,55 +106,55 @@ html(lang='en')
                   .col-4.col-sm-2
                     strong $10
             // Card body
-          // Card
-          // Modal for the pop up button for add address
-          #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addModalLabel', aria-hidden='true')
-            .modal-dialog(role='document')
-              .modal-content
-                .modal-header
-                  h5#addModalLabel.modal-title New Address
-                  button.close(type='button', data-dismiss='modal', aria-label='Close')
-                // content
-                .modal-body
-                  form
-                    .form-row
-                      .col-md-6.mb-3
-                        label(for='cc-name') First name
-                        input.form-control(placeholder='FirstName', required='', type='text', value='Peter')
-                        small.text-muted First name on address
-                        .invalid-feedback
-                          | First name is required
-                      .col-md-6.mb-3
-                        label(for='cc-number') Last name
-                        input.form-control(placeholder='LastName', required='', type='text', value='Harlan')
-                        .invalid-feedback
-                          | Last name is required
-                      .col-md-12.mb-3
-                        label Address 1
-                        input.form-control(placeholder='Address 1', required='', type='text')
-                        .invalid-feedback
-                          | Address 1 is required
-                      .col-md-12.mb-3
-                        label Address 2
-                        input.form-control(placeholder='Address 2', type='text')
-                      .col-md-6.mb-3
-                        label City
-                        input.form-control(placeholder='City', required='', type='text')
-                        .invalid-feedback
-                          | City name is required
-                      .col-md-3.mb-3
-                        label State
-                        input.form-control(placeholder='State', required='', type='text')
-                        .invalid-feedback
-                          | State is required
-                      .col-md-3.mb-3
-                        label Zip Code
-                        input.form-control(placeholder='Zip', required='', type='text')
-                        .invalid-feedback
-                          | Zip code is required
-                    .d-flex.justify-content-end
-                      button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                      button.btn.btn-primary.ml-3(type='submit') Save changes
+          //- // Card
+          //- // Modal for the pop up button for add address
+          //- #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addModalLabel', aria-hidden='true')
+          //-   .modal-dialog(role='document')
+          //-     .modal-content
+          //-       .modal-header
+          //-         h5#addModalLabel.modal-title New Address
+          //-         button.close(type='button', data-dismiss='modal', aria-label='Close')
+          //-       // content
+          //-       .modal-body
+          //-         form
+          //-           .form-row
+          //-             .col-md-6.mb-3
+          //-               label(for='cc-name') First name
+          //-               input.form-control(placeholder='FirstName', required='', type='text', value='Peter')
+          //-               small.text-muted First name on address
+          //-               .invalid-feedback
+          //-                 | First name is required
+          //-             .col-md-6.mb-3
+          //-               label(for='cc-number') Last name
+          //-               input.form-control(placeholder='LastName', required='', type='text', value='Harlan')
+          //-               .invalid-feedback
+          //-                 | Last name is required
+          //-             .col-md-12.mb-3
+          //-               label Address 1
+          //-               input.form-control(placeholder='Address 1', required='', type='text')
+          //-               .invalid-feedback
+          //-                 | Address 1 is required
+          //-             .col-md-12.mb-3
+          //-               label Address 2
+          //-               input.form-control(placeholder='Address 2', type='text')
+          //-             .col-md-6.mb-3
+          //-               label City
+          //-               input.form-control(placeholder='City', required='', type='text')
+          //-               .invalid-feedback
+          //-                 | City name is required
+          //-             .col-md-3.mb-3
+          //-               label State
+          //-               input.form-control(placeholder='State', required='', type='text')
+          //-               .invalid-feedback
+          //-                 | State is required
+          //-             .col-md-3.mb-3
+          //-               label Zip Code
+          //-               input.form-control(placeholder='Zip', required='', type='text')
+          //-               .invalid-feedback
+          //-                 | Zip code is required
+          //-           .d-flex.justify-content-end
+          //-             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+          //-             button.btn.btn-primary.ml-3(type='submit') Save changes
         // Row one
         .col-md-4
           .card

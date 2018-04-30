@@ -122,7 +122,7 @@ app.get('/shoppingCart:usID', function (req, res) {
         message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
     });
     } else {
-        userID = req.params.usID.slice(1);
+        userID = req.session.user;
         let sql = 'SELECT oID FROM orders WHERE buyer='+userID+' AND active=true';
         let query = DB.query(sql, (err, results) => {
             //if error or not found display results
@@ -160,7 +160,7 @@ app.get('/shoppingCart:usID', function (req, res) {
 
 
 //Page for specific book
-app.get('/shgipPayment:subTotal', function (req, res) {
+app.get('/shipPayment:subTotal', function (req, res) {
     if (!req.session.user){
         res.render('thanks', {
         message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
