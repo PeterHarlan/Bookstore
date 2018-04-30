@@ -55,9 +55,9 @@ html(lang='en')
               
                 ul.list-group.mb-3
                   - var i = 0;
+                  - var subTotal = 0;
                   - while (bookInfo[i] != undefined) {
                   - var currentBook = bookInfo[i++];
-                  - var subTotal = subTotal + currentBook.price;
                   
                   li.list-group-item.d-flex.justify-content-between.lh-condensed
                     div

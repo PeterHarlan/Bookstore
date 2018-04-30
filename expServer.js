@@ -140,14 +140,22 @@ app.get('/shoppingCart:usID', function (req, res) {
                     //if error or not found display results
                     if (err) throw err;
 
+                    var i = 0;
+                    var subTotal = 0;
+                    while(bookResults[i] != undefined){
+                        var bookTotal = Number(bookResults[i].price) * Number(bookResults[i++].orderQty);
+                        subTotal = Number(subTotal) + Number(bookTotal);
+                    }
+
                     res.render('shoppingCart', {
                         bookInfo: bookResults,
-                        user: req.session.user
+                        user: req.session.user,
+                        subTotal: subTotal
                     });
                 });
             }
         });
-    }
+     }
 });
 
 
