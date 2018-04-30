@@ -52,7 +52,7 @@ html(lang='en')
               h2.ml-2
                 span#totalQtn.badge.badge-secondary.badge-pill 
             div
-              form
+              
                 ul.list-group.mb-3
                   - var i = 0;
                   - while (bookInfo[i] != undefined) {
@@ -62,17 +62,18 @@ html(lang='en')
                     div
                       h6.my-0 #{currentBook.title}
                       small.text-muted ISBN # #{currentBook.isbn}
-                      .input-group
-                        input.form-control.form-control-sm.qtnValue(type='text', placeholder='Quantity', required value=""+currentBook.orderQty onchange='changeTotal()')
-                        span.ml-2  @ $#{currentBook.price}  each
-                        input.bookPrice(type='hidden', value=''+currentBook.price)
+                      form
+                        .input-group
+                          input.form-control.form-control-sm.qtnValue(type='text', placeholder='Quantity', required value=""+currentBook.orderQty onchange='changeTotal();this.form.submit()')
+                          span.ml-2  @ $#{currentBook.price}  each
+                          input.bookPrice(type='hidden', value=''+currentBook.price)
                     span.text-muted.calPrice 
                   - }
                   li.list-group-item.d-flex.justify-content-between
                     span Total (USD)
                     #totalPrice.strong
                   // onclick call shipPayment()
-                button.btn.btn-success.mt-3.btn-block(type='submit')
+                button.btn.btn-success.mt-3.btn-block(type='button')
                   i.fa.fa-shopping-cart(aria-hidden='true')
                   |  Order Details!
     // Container
