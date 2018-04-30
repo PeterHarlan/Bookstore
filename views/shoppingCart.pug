@@ -65,7 +65,7 @@ html(lang='en')
                       small.text-muted ISBN # #{currentBook.isbn}
                       form
                         .input-group
-                          input.form-control.form-control-sm.qtnValue(type='text', placeholder='Quantity', required value=""+currentBook.orderQty onchange='changeTotal();this.form.submit()')
+                          input.form-control.form-control-sm.qtnValue(type='text', placeholder='Quantity', required value=""+currentBook.orderQty onchange='changeTotal()')
                           span.ml-2  @ $#{currentBook.price}  each
                           input.bookPrice(type='hidden', value=''+currentBook.price)
                     span.text-muted.calPrice 
@@ -74,7 +74,10 @@ html(lang='en')
                     span Total (USD)
                     #totalPrice.strong
                   // onclick call shipPayment()
-                  a(href='/shipPayment:' + subTotal) Order Details
+                button.btn.btn-success.mt-3.btn-block(onclick="shipPayment()")
+                  i.fa.fa-shopping-cart(aria-hidden='true')
+                  |  Order Details!
+                  //a(href='/shipPayment:' + subTotal) Order Details
 
     // Container
     // jQuery (necessary for Bootstrap's JavaScript plugins)
