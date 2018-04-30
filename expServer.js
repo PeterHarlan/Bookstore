@@ -103,7 +103,46 @@ app.get('/bookPage:isbn', function (req, res) {
             //else send book info to the page
             } else {
                 res.render('bookPage', {
-                    bookInfo: results[0]
+                    bookInfo: results[0],
+                    user: req.session.user
+                });
+            }
+        });
+    }
+});
+
+
+
+
+//Shopping cart page
+app.get('/shoppingCart:usID', function (req, res) {
+    if (!req.session.user){
+        res.render('thanks', {
+        message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
+    });
+    } else {
+        userID = req.params.usID.slice(1);
+        let sql = 'SELECT oID FROM orders WHERE buyer='+userID+' AND active=true';
+        let query = DB.query(sql, (err, results) => {
+            //if error or not found display results
+            if (err) throw err;
+            if (results[0] == undefined) {
+                res.render('thanks', {
+                    message: "Sorry, your shopping cart is empty"
+                });
+            //else send book info to the page
+            } else {
+                let bookSQL = 'SELECT isbn, orderQty, title, price FROM orderList, books ' +
+                    'WHERE bookID=isbn AND orderID='+ results[0]["oID"]+';';
+
+                let bookQuery = DB.query(bookSQL, (err, bookResults) => {
+                    //if error or not found display results
+                    if (err) throw err;
+
+                    res.render('shoppingCart', {
+                        bookInfo: bookResults,
+                        user: req.session.user
+                    });
                 });
             }
         });

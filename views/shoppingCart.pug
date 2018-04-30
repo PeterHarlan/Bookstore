@@ -1,0 +1,85 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='Buy your books at the WKU Bookstore')
+    meta(name='keywords', content='wku, bookstore, Western Kentucky University, college, bowling green, kentucky, ky, bg')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    title WKU Bookstore
+    // Bootstrap
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    // Font Awesome
+    link(rel='stylesheet', href='css/font-awesome.min.css')
+  // *********************************************
+  // onload calls the java script when the webpage is loaded
+  body(onload='getFocus()')
+    // Navigation
+    // Add navbar-light bg-faded  to make navbar visiable
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      a.navbar-brand(href='index.html') WKU Books
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse.justify-content-end
+        ul.navbar-nav
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.active(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+              | Sign in
+            .dropdown-menu.px-2(aria-labelledby='navbarDropdown')
+              input#Email.dropdown-item.form-control.mt-1(type='text', placeholder='email')
+              input#Password.dropdown-item.form-control.my-1(type='password', placeholder='password')
+              .dropdown-divider
+              button#LogIn.dropdown-item(type='button', onclick='submitLogin()') Log In
+              button#SignUp.dropdown-item(type='button', onclick='signUp()') Sign Up
+              // If Logged In
+              button#CreatePage.dropdown-item(type='button', onclick='createPageLink()', style='display: none;') Create Page
+              button#SignOut.dropdown-item.example(type='button', style='display: none;', onclick='logOut()') Sign Out
+          li.nav-item
+            a.nav-link.active(href='#') Orders
+          li.nav-item
+            a.nav-link.active(href='/shoppingCart:'+user)
+              i.fa.fa-shopping-cart(aria-hidden='true')
+    .container.my-4
+      .container-fluid
+        .row
+          .col-md-8.offset-md-2
+            span.d-flex.justify-content-between.align-items-center.mb-3
+              h3.display-3
+                strong
+                  i.fa.fa-shopping-cart(aria-hidden='true')
+                  |  Your Cart
+              h2.ml-2
+                span.badge.badge-secondary.badge-pill 23
+            div
+              form
+                ul.list-group.mb-3
+                 - var i = 0;
+                 -var orderTotal = 0;
+                 - while (bookInfo[i] != undefined) {
+                  - var currentBook = bookInfo[i++];
+                  - var bookTotal = currentBook.price * currentBook.orderQty;
+                  - orderTotal = orderTotal + bookTotal;
+                    li.list-group-item.d-flex.justify-content-between.lh-condensed
+                     div
+                      h6.my-0 #{currentBook.title}
+                        small.text-muted ISBN # #{currentBook.isbn}
+                        | Quantity: #{currentBook.orderQty}
+                        span.ml-2 @ #{currentBook.price} each
+                    span.text-muted #{bookTotal}
+                 - }
+                  li.list-group-item.d-flex.justify-content-between
+                    span Total (USD)
+                    strong #{orderTotal}
+                // onclick call shipPayment()
+                button.btn.btn-success.mt-3.btn-block(type='submit')
+                  i.fa.fa-shopping-cart(aria-hidden='true')
+                  |  Order Details!
+    // Container
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+    script(src='js/bootstrap.min.js')
+    script(src='js/login.js')
+    script(src='js/loginpage.js')
+    script(src='js/customFunctions.js')
