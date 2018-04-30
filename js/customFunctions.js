@@ -45,6 +45,13 @@ function shipPayment()
 {
   location.href = 'shipPayment.html';
 }
+function shipPayment()
+{
+  var subTotal = '/shipPayment:';
+  subTotal += document.getElementById("totalPrice").innerHTML;
+  console.log(subTotal); 
+  location.href = subTotal;
+}
 // If the user is logged in, call this function
 function logIn()
 {
