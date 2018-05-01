@@ -115,3 +115,16 @@ function changeTotal() {
     document.getElementById("totalQtn").innerHTML = totalQtn;
     document.getElementById("totalPrice").innerHTML = totalPrice.toFixed(2);;
 }
+function calShipping() {
+  x = document.getElementById("subtotal").value;
+  document.getElementById("calTotal").innerHTML = "<strong>$"+(Number(x)+5).toFixed(2)+"</strong>";
+}
+function stShipping() {
+  x = document.getElementById("subtotal").value;
+  document.getElementById("calTotal").innerHTML = "<strong>$"+(Number(x)+5).toFixed(2)+"</strong>";
+}
+function exShipping() {
+  x = document.getElementById("subtotal").value;
+  document.getElementById("calTotal").innerHTML = "<strong>$"+(Number(x)+10).toFixed(2)+"</strong>";
+}
+

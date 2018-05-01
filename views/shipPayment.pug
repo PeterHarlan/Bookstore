@@ -14,7 +14,7 @@ html(lang='en')
     link(rel='stylesheet', href='css/font-awesome.min.css')
   // *********************************************
   // onload calls the java script when the webpage is loaded
-  body(onload='getFocus()')
+  body(onload='calShipping()')
     // Navigation
     // Add navbar-light bg-faded  to make navbar visiable
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
@@ -87,7 +87,7 @@ html(lang='en')
                       input.custom-control-input(type='radio', name='billRadio', id="billAdd"+i value=''+address.aID, required)
                     label.custom-control-label(for='billAdd'+i)
                       strong #{address.aFname} #{address.aLname}
-                      |  #{address.street1}, #{address.city}, #{address.st} #{address.zip} #{subtotal}
+                      |  #{address.street1}, #{address.city}, #{address.st} #{address.zip}
                 - }
               // Card body
             // Card
@@ -99,7 +99,7 @@ html(lang='en')
                 .container-fluid
                   .row
                     .custom-control.custom-radio.col-8.col-sm-10
-                      input#shipOpt1.custom-control-input(type='radio', name='shipType', checked='' value='false')
+                      input#shipOpt1.custom-control-input(type='radio', name='shipType', checked='' value='false' onchange="stShipping()")
                       label.custom-control-label(for='shipOpt1')
                         strong Standard No-Rush Shipping
                         |  - Save money but 5-7 day shipping
@@ -107,13 +107,15 @@ html(lang='en')
                       strong $5
                     // Additional Address, not required
                     .custom-control.custom-radio.col-8.col-sm-10
-                      input#shipOpt2.custom-control-input(type='radio', name='shipType' value='true')
+                      input#shipOpt2.custom-control-input(type='radio', name='shipType' value='true' onchange="exShipping()")
                       label.custom-control-label(for='shipOpt2')
                         strong Lightning Quick Shipping
                         |  - Guaranteed 2-3 day shipping
                     .col-4.col-sm-2
                       strong $10
+                    input#subtotal(type='hidden', value=''+subtotal)
               // Card body
+              #calTotal.card-footer.text-center
             //- // Card
             //- // Modal for the pop up button for add address
             //- #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addModalLabel', aria-hidden='true')
