@@ -251,6 +251,93 @@ app.get('/checkStock:usID', function (req, res) {
     }
 });
 
+//Search result page
+app.get('/deleteBook:usID', function (req, res) {
+    if (!req.session.authority || req.session.authority != 1)
+        res.render('thanks', {
+            message: "This function is for managers only.  Please log in with your manager account to continue"
+        });
+    else {
+        phrase = req.body.searchInput;
+        let sql = 'SELECT * FROM books ';
+
+        let query = DB.query(sql, (err, results) => {
+            //if error or not found display results
+            if (err) throw err;
+            if (results[0] == undefined) {
+                res.sendFile(path.join(__dirname + '/error404.html'));
+            //else send book info to the page
+            } else {
+                res.render('deleteBook', {
+                    books: results
+                });
+            }
+        });
+    }
+});
+
+//Search result page
+app.get('/submitDelete:isbn', function (req, res) {
+    if (!req.session.authority || req.session.authority != 1)
+        res.render('thanks', {
+            message: "This function is for managers only.  Please log in with your manager account to continue"
+        });
+    else {
+        isbn = req.params.isbn.slice(1);
+        let sql = 'UPDATE books ' +
+            'SET qty=0, reorder=0 ' +
+            'WHERE isbn='+isbn;
+
+        let query = DB.query(sql, (err, results) => {
+            //if error or not found display results
+            if (err) throw err;
+            res.render('thanks', {
+                message: "The book has been deleted from active inventory"
+            });
+        });
+    }
+});
+
+
+
+//Insert book function
+app.post("/modify", function (req, res) {
+    if (!req.session.authority || req.session.authority != 1)
+        res.render('thanks', {
+            message: "This function is for managers only.  Please log in with your manager account to continue"
+        });
+    else {
+        //Grab book information from post object
+
+        title = req.body.title;
+        author = req.body.author;
+        img = req.body.imLink;
+        isbn = req.body.isbn;
+        pub = req.body.pub;
+        ed = req.body.ed;
+        qty = req.body.qty;
+        reorder = req.body.qtyMin;
+        price = req.body.bPrice;
+        descript = req.body.descript;
+
+        //Create query string
+        let sql = 'UPDATE books SET title="' + title + '", author="' + author + 
+            '", img="' + img + '", pub="' + pub + '", ed="' + ed + '", qty=' + qty +
+            ', reorder=' + reorder + ', price=' + price + ', descript="' + descript +
+            '" WHERE isbn=' + isbn;
+        console.log(sql);
+        //Submit query to database
+        let query = DB.query(sql, (err, results) => {
+            //if error display results
+            if (err) throw err;
+
+            //send completion statement to thank you page.
+            var statement = 'The book "' + title + '" has been changed in the store';
+            res.render('thanks', { message: statement });
+        });
+    }
+});
+
 //Insert book function
 app.post("/insert", function (req, res) {
     if (!req.session.authority || req.session.authority != 1)
