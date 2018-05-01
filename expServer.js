@@ -214,6 +214,43 @@ app.post('/searchRes', function (req, res) {
 });
 
 
+//check Admin
+app.get("/adminCheck:usID", function (req, res) {
+    if (!req.session.authority || req.session.authority != 1)
+        res.render('thanks', {
+            message: "This function is for managers only.  Please log in with your manager account to continue"
+        });
+    else {
+        res.render('commandCenter');
+    }
+});
+
+//Search result page
+app.get('/checkStock:usID', function (req, res) {
+    if (!req.session.authority || req.session.authority != 1)
+        res.render('thanks', {
+            message: "This function is for managers only.  Please log in with your manager account to continue"
+        });
+    else {
+        phrase = req.body.searchInput;
+        let sql = 'SELECT * FROM books ' +
+        'WHERE qty<reorder';
+
+        let query = DB.query(sql, (err, results) => {
+            //if error or not found display results
+            if (err) throw err;
+            if (results[0] == undefined) {
+                res.sendFile(path.join(__dirname + '/error404.html'));
+            //else send book info to the page
+            } else {
+                res.render('checkStock', {
+                    books: results
+                });
+            }
+        });
+    }
+});
+
 //Insert book function
 app.post("/insert", function (req, res) {
     if (!req.session.authority || req.session.authority != 1)
