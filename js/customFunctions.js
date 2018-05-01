@@ -55,8 +55,15 @@ function shipPayment()
 // If the user is logged in, call this function
 function logIn()
 {
-  toggleHide('navNotLogIn');
-  toggleHide('navIsLogIn');
+  var x = document.getElementById("navLogIn");
+  var containsClass = x.classList.contains("was-validated");
+  if(containsClass)
+  {
+    toggleHide('navNotLogIn');
+    toggleHide('navIsLogIn');
+    //Remove was validated class form navLogIn
+  }
+
 }
 //Checks the user for admin status, then toggle commandCenter button
 function isAdmin()

@@ -51,7 +51,8 @@ app.use(
 );
 
 //Log out operation
-app.get('/logout', function (req, res) {
+app.get('/logout:usID', function (req, res) {
+    console.log("shit")
     req.session.destroy(); // destroy all session variables
     res.sendFile(path.join(__dirname + '/'));
 });
@@ -78,8 +79,6 @@ app.post("/login", function (req, res) {
             req.session.lastname = results[0]["lname"];
             req.session.email = results[0]["email"];
             req.session.authority = results[0]["manager"]
-
-            
 
             res.redirect("/");
         }
@@ -438,6 +437,9 @@ app.post("/newUser", function (req, res) {
                                     //submit insert phone query to database
                                     let phoneInsert = DB.query(phoneSQL, (err, phoneResults) => {
                                         if (err) throw err;
+
+                                            //send completion statement to thank you page.
+                                            res.redirect("/");
                                     });
                                 }
                             });
@@ -447,12 +449,6 @@ app.post("/newUser", function (req, res) {
             });
         }
     });
-
-
-    //send completion statement to thank you page.
-    var statement = 'The user "' + fname + " " + lname + '" has been added to the store';
-    res.render('thanks', { message: statement });
-
 });
 
 //Buy the book with passed isbn

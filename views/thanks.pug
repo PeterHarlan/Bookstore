@@ -15,7 +15,7 @@ html(lang='en')
     link(rel='stylesheet', href='css/custom.css')
   // *********************************************
   // onload calls the java script when the webpage is loaded
-  body(onload='getFocus()')
+  body(onload='logIn()')
     // Custom CSS
     style.
       .thankImage {
@@ -38,15 +38,17 @@ html(lang='en')
                 a#navbarDropdown.nav-link.dropdown-toggle.active(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                   | Sign in
                 .dropdown-menu.px-2(aria-labelledby='navbarDropdown')
-                  form(method='post', action='/login')
-                    input.dropdown-item.form-control.mt-1(type='text', name='username', placeholder='email')
-                    input.dropdown-item.form-control.my-1(type='password', name='password', placeholder='password')
-                    .dropdown-divider
-                    button#LogIn.dropdown-item(type='submit', onclick='logIn()') Log In
-                  button#SignUp.dropdown-item(type='button', onclick='signUp()') Sign Up
+                  #navNotLogIn
+                    form(method='post', action='/login')
+                      input.dropdown-item.form-control.mt-1(type='text', name='username', placeholder='email')
+                      input.dropdown-item.form-control.my-1(type='password', name='password', placeholder='password')
+                      .dropdown-divider
+                      button#LogIn.dropdown-item(type='submit', onclick='logIn()') Log In
+                      button#SignUp.dropdown-item(type='button', onclick='signUp()' href="/signUp.html") Sign Up
                   // If Logged In
-                  button#CreatePage.dropdown-item(type='button', onclick='createPageLink()', style='display: none;') Create Page
-                  button#SignOut.dropdown-item.example(type='button', style='display: none;', onclick='logOut()') Sign Out
+                  #navIsLogIn(style='display: none;')
+                    //button#CreatePage.dropdown-item(type='button', onclick='createPageLink()', style='display: none;') Create Page
+                    button#SignOut.dropdown-item.example(type='button', onclick='signOut()' href="/logout:1") Sign Out
               li.nav-item
                 a.nav-link.active(href='#') Orders
               li.nav-item
@@ -61,5 +63,4 @@ html(lang='en')
     script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
     script(src='js/bootstrap.min.js')
-    script(src='js/login.js')
-    script(src='js/loginpage.js')
+    script(src='js/customFunctions.js')
