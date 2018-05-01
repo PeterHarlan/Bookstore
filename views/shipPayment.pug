@@ -56,7 +56,10 @@ html(lang='en')
                 - while (addresses[i] != undefined) {
                 - address=addresses[i++];
                   .custom-control.custom-radio
-                    input.custom-control-input(type='radio', name='shipRadio', checked='', id="shipAdd"+i value=''+address.aID)
+                    if(i==1)
+                      input.custom-control-input(type='radio', name='shipRadio', id="shipAdd"+i value=''+address.aID, required, checked="")
+                    else 
+                      input.custom-control-input(type='radio', name='shipRadio', id="shipAdd"+i value=''+address.aID, required)
                     label.custom-control-label(for='shipAdd'+i)
                       strong #{address.aFname} #{address.aLname}
                       |  #{address.street1}, #{address.city}, #{address.st} #{address.zip}
@@ -79,7 +82,10 @@ html(lang='en')
                 - while (addresses[i] != undefined) {
                 - address=addresses[i++];
                   .custom-control.custom-radio
-                    input.custom-control-input(type='radio', name='billRadio', checked='', id="billAdd"+i value=''+address.aID)
+                    if(i==1)
+                      input.custom-control-input(type='radio', name='billRadio', id="billAdd"+i value=''+address.aID, required, checked="")
+                    else  
+                      input.custom-control-input(type='radio', name='billRadio', id="billAdd"+i value=''+address.aID, required)
                     label.custom-control-label(for='billAdd'+i)
                       strong #{address.aFname} #{address.aLname}
                       |  #{address.street1}, #{address.city}, #{address.st} #{address.zip}
