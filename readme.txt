@@ -12,4 +12,4 @@ In the root directory of the project, you will need to execute the command node 
 
 This command will begin running the expServer.js file, which provides all of the communication with the database and delivery of dynamic content to the user.
 
-After executing this command you can open the index.html file and begin browsing from there.
+After executing this command you will direct your web browser to http://localhost:3000/ and begin browsing from there.
