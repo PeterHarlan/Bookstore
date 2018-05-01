@@ -67,7 +67,6 @@ html(lang='en')
               // Card body
             // Card
 
-            
             //.form-check.my-3
               //input#sameAddCheck.form-check-input(type='checkbox', value='', onchange="toggleHide('billingDiv')")
               //label.form-check-label(for='sameAddCheck')
@@ -88,7 +87,7 @@ html(lang='en')
                       input.custom-control-input(type='radio', name='billRadio', id="billAdd"+i value=''+address.aID, required)
                     label.custom-control-label(for='billAdd'+i)
                       strong #{address.aFname} #{address.aLname}
-                      |  #{address.street1}, #{address.city}, #{address.st} #{address.zip}
+                      |  #{address.street1}, #{address.city}, #{address.st} #{address.zip} #{subtotal}
                 - }
               // Card body
             // Card
