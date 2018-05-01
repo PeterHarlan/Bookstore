@@ -372,6 +372,45 @@ app.post("/buy", function (req, res) {
     });
 });
 
+//Buy the book with passed isbn
+app.post("/checkoutFinal", function (req, res) {
+    console.log(req.body);
+
+    // //Select current user's active order
+    // let orderQuery = 'SELECT oID FROM orders ' +
+    //     'WHERE buyer=' + user + ' AND active=true';
+
+    // // if not active orders, create new and select ID
+    // let selectOrder = DB.query(orderQuery, (err, results) => {
+    //     if (err) throw err;
+    //     if (results[0] == undefined) {
+
+    //         let createQuery = 'INSERT INTO orders (buyer,active)' +
+    //         'VALUES('+user+',true)';
+            
+    //         let createOrder = DB.query(createQuery, (err, results) => {
+    //             if (err) throw err;
+
+    //             let selectLast = DB.query('SELECT LAST_INSERT_ID()', (err,results) => {
+    //                 if (err) throw err;
+    //                 currentOrder = results[0]["LAST_INSERT_ID()"];
+
+    //             });
+    //         });
+    //     //Otherwise, assign current order to active order
+    //     } else { currentOrder = results[0]["oID"]; }
+
+    //     console.log(currentOrder);
+    //     //Add book to order
+    //     let orderListQuery = 'INSERT INTO orderList(orderID, bookID, orderQty) ' +
+    //         'VALUES('+currentOrder+',"'+isbn+'",'+qty+')';   
+
+    //     let addBookOrder = DB.query(orderListQuery, (err, results) => {
+    //         if (err) throw err;
+    //     });
+    // });
+});
+
 // Start server listening
 app.listen('3000', () => {
     console.log('Server started on port 3000');
