@@ -354,6 +354,7 @@ app.post("/buy", function (req, res) {
 
                 let selectLast = DB.query('SELECT LAST_INSERT_ID()', (err,results) => {
                     if (err) throw err;
+                    console.log(results[0]["LAST_INSERT_ID()"]);
                     currentOrder = results[0]["LAST_INSERT_ID()"];
 
                 });
@@ -369,6 +370,11 @@ app.post("/buy", function (req, res) {
         let addBookOrder = DB.query(orderListQuery, (err, results) => {
             if (err) throw err;
         });
+
+        //send completion statement to thank you page.
+        var statement = req.session.firstname + ", the book has been placed in your shopping cart";
+        res.render('thanks', { message: statement });
+
     });
 });
 
