@@ -217,9 +217,9 @@ app.post('/searchRes', function (req, res) {
 //Insert book function
 app.post("/insert", function (req, res) {
     if (!req.session.authority || req.session.authority != 1)
-    res.render('thanks', {
-        message: "This function is for managers only.  Please log in with your manager account to continue"
-    });
+        res.render('thanks', {
+            message: "This function is for managers only.  Please log in with your manager account to continue"
+        });
     else {
         //Grab book information from post object
 
@@ -233,11 +233,11 @@ app.post("/insert", function (req, res) {
         qty = req.body.qty;
         reorder = req.body.qtyMin;
         price = req.body.bPrice;
-        descript = req.body.descript; 
+        descript = req.body.descript;
 
         //Create query string
         let sql = 'INSERT INTO books (isbn, title, author, qty, pub, ed, price, reorder, img, descript)' +
-            'VALUES("'+isbn+'","'+title+'","'+author+'",'+qty+',"'+pub+'",'+ed+','+price+','+reorder+',"'+img+'","'+descript+'")';
+            'VALUES("' + isbn + '","' + title + '","' + author + '",' + qty + ',"' + pub + '",' + ed + ',' + price + ',' + reorder + ',"' + img + '","' + descript + '")';
 
         //Submit query to database
         let query = DB.query(sql, (err, results) => {
@@ -374,41 +374,54 @@ app.post("/buy", function (req, res) {
 
 //Buy the book with passed isbn
 app.post("/checkoutFinal", function (req, res) {
-    console.log(req.body);
+    if (!req.session.user)
+        res.render('thanks', {
+            message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
+        });
+    else {
+        shipID = req.body.shipRadio;
+        billID = req.body.billRadio;
+        shipType = req.body.shipType;
+        ccNum = req.body.ccNum;
+        exp = req.body.exp;
+        cvv = req.body.cvv;
 
-    // //Select current user's active order
-    // let orderQuery = 'SELECT oID FROM orders ' +
-    //     'WHERE buyer=' + user + ' AND active=true';
+        //Select current user's active order
+        let orderQuery = 'SELECT oID FROM orders ' +
+            'WHERE buyer=' + req.session.user + ' AND active=true';
 
-    // // if not active orders, create new and select ID
-    // let selectOrder = DB.query(orderQuery, (err, results) => {
-    //     if (err) throw err;
-    //     if (results[0] == undefined) {
+        // if not active orders, create new and select ID
+        let selectOrder = DB.query(orderQuery, (err, orderResults) => {
+            if (err) throw err;
+            if (orderResults[0] == undefined) {
+                res.sendFile(path.join(__dirname + '/error404.html'));
 
-    //         let createQuery = 'INSERT INTO orders (buyer,active)' +
-    //         'VALUES('+user+',true)';
-            
-    //         let createOrder = DB.query(createQuery, (err, results) => {
-    //             if (err) throw err;
+                //Otherwise, assign current order to active order
+            } else { currentOrder = orderResults[0]["oID"]; }
+            console.log(currentOrder);
 
-    //             let selectLast = DB.query('SELECT LAST_INSERT_ID()', (err,results) => {
-    //                 if (err) throw err;
-    //                 currentOrder = results[0]["LAST_INSERT_ID()"];
 
-    //             });
-    //         });
-    //     //Otherwise, assign current order to active order
-    //     } else { currentOrder = results[0]["oID"]; }
+            let paymentQuery = "INSERT INTO payments(ccNum,custID,cvv,expir,addressID) " +
+                "VALUES(" + ccNum + "," + req.session.user + "," + cvv + "," + exp + "," + billID + ")";
+            console.log(paymentQuery);
+            let paymentInsert = DB.query(paymentQuery, (err, paymentRes) => {
+                if (err) throw err;
 
-    //     console.log(currentOrder);
-    //     //Add book to order
-    //     let orderListQuery = 'INSERT INTO orderList(orderID, bookID, orderQty) ' +
-    //         'VALUES('+currentOrder+',"'+isbn+'",'+qty+')';   
+                    //Add book to order
+                    let orderQuery = 'UPDATE orders SET address=' + shipID + ', buyer=' + req.session.user + ', payment=' + ccNum + ', active=false' +
+                        ' WHERE oID=' + currentOrder;
+                    console.log(orderQuery);
+                    let updateOrder = DB.query(orderQuery, (err, updateResults) => {
+                        if (err) throw err;
+                    });
 
-    //     let addBookOrder = DB.query(orderListQuery, (err, results) => {
-    //         if (err) throw err;
-    //     });
-    // });
+            });
+        });
+
+        //send completion statement to thank you page.
+        var statement = req.session.firstname + ", your order has been placed";
+        res.render('thanks', { message: statement });
+    }
 });
 
 // Start server listening

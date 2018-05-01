@@ -137,5 +137,8 @@ INSERT INTO users(fname,lname,login,password,email,manager) VALUES("John", "Smit
 
 INSERT INTO addresses(aFname,aLname,street1,street2,city,st,zip,attn) VALUES("John", "Smith", "320 Moneymaker Ln.", "Apt 2", "Cacheflow", "MT", "87664", "Clarice");
 
+INSERT INTO addresses(aFname,aLname,street1,city,st,zip) VALUES("Janice", "Recaro", "1234 Poolside Ave.", "Centerville", "GA", 58745);
+
 INSERT INTO payments VALUES("1234567898745612", 1, "168", "0410", 1);
+
 
