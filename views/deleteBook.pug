@@ -14,7 +14,7 @@ html(lang='en')
     link(rel='stylesheet', href='css/font-awesome.min.css')
   // *********************************************
   // onload calls the java script when the webpage is loaded
-  body(onload='getFocus()')
+  body(onload='getFocus("search")')
     // Navigation
     // Add navbar-light bg-faded  to make navbar visiable
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
@@ -45,7 +45,7 @@ html(lang='en')
       h3.display-3.mb-3
         strong Delete Book
       .input-group
-        input.form-control.hidden-sm(type='text', placeholder='Search for...')
+        input#search.form-control.hidden-sm(type='text', placeholder='Search for...')
         span.input-group-btn
           button.btn.btn-success(type='button')
             i.fa.fa-search(aria-hidden='true')
@@ -70,6 +70,7 @@ html(lang='en')
                   div
                     strong ISBN
                     |  #{currentBook.isbn}
+                    input#ISBN(type='hidden', value='/submitDelete:'+currentBook.isbn)
                   div
                     strong Pub
                     |  #{currentBook.pub}
@@ -77,11 +78,13 @@ html(lang='en')
                     strong Edition
                     |  #{currentBook.ed}
                 .col-12.col-md-6
-                  a(href="/submitDelete:"+currentBook.isbn ) Delete Book
+                  //a(href="/submitDelete:"+currentBook.isbn) Delete Book
+                  button.btn.btn-success.btn-lg.btn-block.mt-4(type='button' onClick="deleteISBN()")
+                    i.fa.fa-trash(aria-hidden='true')
+                    |  Delete Book
       -}
     // jQuery (necessary for Bootstrap's JavaScript plugins)
     script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
     script(src='js/bootstrap.min.js')
-    script(src='js/login.js')
-    script(src='js/loginpage.js')
+    script(src='js/customFunctions.js')

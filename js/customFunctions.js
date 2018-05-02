@@ -52,6 +52,11 @@ function shipPayment()
   console.log(subTotal); 
   location.href = subTotal;
 }
+function deleteISBN()
+{
+  var bookDeletePath = document.getElementById("ISBN").value;
+  location.href = bookDeletePath;
+}
 // If the user is logged in, call this function
 function logIn()
 {
@@ -134,4 +139,5 @@ function exShipping() {
   x = document.getElementById("subtotal").value;
   document.getElementById("calTotal").innerHTML = "<strong>$"+(Number(x)+10).toFixed(2)+"</strong>";
 }
+
 
