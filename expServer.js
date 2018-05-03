@@ -185,6 +185,7 @@ app.get('/shipPayment:subTotal', function (req, res) {
 
 //Search result page
 app.post('/searchRes', function (req, res) {
+    console.log("SearchRes Hellow!");
     if (!req.session.user)
     res.render('thanks', {
         message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
@@ -196,6 +197,8 @@ app.post('/searchRes', function (req, res) {
         'title LIKE "%' + phrase + '%" OR ' +
         'isbn LIKE "%' + phrase + '%" OR ' +
         'pub LIKE "%' + phrase + '%"';
+
+        console.log(sql);
 
         let query = DB.query(sql, (err, results) => {
             //if error or not found display results

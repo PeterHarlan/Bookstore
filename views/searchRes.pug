@@ -40,12 +40,13 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
           i.fa.fa-shopping-cart(aria-hidden='true')
 // Search
 .container.mt-4.mb-3
-  img.img-fluid.col-md-6.offset-md-3.col-lg-8.offset-lg-2(src='img/search.png' alt='Search Image')
-  .input-group
-    input.form-control.hidden-sm(type='text' placeholder='Search for...')
+  form(method='post', action='/searchRes')
+    img.img-fluid.col-md-6.offset-md-3.col-lg-8.offset-lg-2(src='img/search.png' alt='Search Image')
+    .input-group
+    input.form-control.hidden-sm(type='text' placeholder='Search for...' name='searchInput')
     span.input-group-btn
-      button.btn.btn-success(type='button')
-        i.fa.fa-search(aria-hidden='true')
+    button.btn.btn-success(type='submit')
+      i.fa.fa-search(aria-hidden='true')
 // Results
 .my-4
   - var i = 0;
