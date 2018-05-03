@@ -52,10 +52,53 @@ app.use(
 
 //Log out operation
 app.get('/logout:usID', function (req, res) {
+    console.log("log out hello");
     req.session.destroy(); // destroy all session variables
-    res.sendFile(path.join(__dirname + '/'));
+    res.render('thanks', {
+        message: "Logged Out"
+    });
 });
 
+
+// app.get('/shoppingCart:usID', function (req, res) {
+//     if (!req.session.user){
+//         res.render('thanks', {
+//         message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
+//     });
+//     } else {
+//         userID = req.session.user;
+//         let sql = 'SELECT oID FROM orders WHERE buyer='+userID+' AND active=true';
+//         let query = DB.query(sql, (err, results) => {
+//             //if error or not found display results
+//             if (err) throw err;
+//             if (results[0] == undefined) {
+                
+//             //else send book info to the page
+//             } else {
+//                 let bookSQL = 'SELECT isbn, orderQty, title, price FROM orderList, books ' +
+//                     'WHERE bookID=isbn AND orderID='+ results[0]["oID"]+';';
+
+//                 let bookQuery = DB.query(bookSQL, (err, bookResults) => {
+//                     //if error or not found display results
+//                     if (err) throw err;
+
+//                     var i = 0;
+//                     var subTotal = 0;
+//                     while(bookResults[i] != undefined){
+//                         var bookTotal = Number(bookResults[i].price) * Number(bookResults[i++].orderQty);
+//                         subTotal = Number(subTotal) + Number(bookTotal);
+//                     }
+
+//                     res.render('shoppingCart', {
+//                         bookInfo: bookResults,
+//                         user: req.session.user,
+//                         subTotal: subTotal
+//                     });
+//                 });
+//             }
+//         });
+//      }
+// });
 
 // Login action for customers (POST, so there's no web page)
 app.post("/login", function (req, res) {
