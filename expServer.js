@@ -52,7 +52,6 @@ app.use(
 
 //Log out operation
 app.get('/logout:usID', function (req, res) {
-    console.log("shit")
     req.session.destroy(); // destroy all session variables
     res.sendFile(path.join(__dirname + '/'));
 });
