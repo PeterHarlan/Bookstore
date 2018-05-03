@@ -44,12 +44,12 @@ html(lang="en")
               i.fa.fa-shopping-cart(aria-hidden="true")
     // Search
     .container.mt-4.mb-3
-      form
+      form(method='post', action='/searchRes')
         .input-group
-          input.form-control.hidden-sm(type="text" id="input" placeholder="Search for...")
+          input.form-control.hidden-sm(type='text' placeholder='Search for...' name='searchInput')
           span.input-group-btn
-            button.btn.btn-success(type="button")
-              i.fa.fa-search(aria-hidden="true")
+          button.btn.btn-success(type='submit')
+            i.fa.fa-search(aria-hidden='true')
     .container
       .row
         .p-2.col-12.order-1.order-md-1

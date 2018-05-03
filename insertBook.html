@@ -21,7 +21,7 @@
 <!--*********************************************-->
 <!--onload calls the java script when the webpage is loaded-->
 
-<body>
+<body onload="getFocus('bookTitle')">
   <!--Navigation-->
   <!--Add navbar-light bg-faded  to make navbar visiable-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -68,6 +68,7 @@
 
 
   <div class="container my-4">
+    <h3 class="display-3 mb-3"><strong>Insert Book</strong></h3>
     <form class="needs-validation" novalidate method="post" action="/insert">
       <div class="form-row">
         <!-- Book Title -->
@@ -144,8 +145,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src='js/login.js'></script>
-  <script src='js/loginpage.js'></script>
   <script src='js/customFunctions.js'></script>
 
 

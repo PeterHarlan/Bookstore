@@ -203,7 +203,7 @@ app.post('/searchRes', function (req, res) {
             //if error or not found display results
             if (err) throw err;
             if (results[0] == undefined) {
-                res.sendFile(path.join(__dirname + '/error404.html'));
+                res.sendFile(path.join(__dirname + '/noBook.html'));
             //else send book info to the page
             } else {
                 res.render('searchRes', {
