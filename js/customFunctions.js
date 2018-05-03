@@ -80,7 +80,7 @@ function isAdmin()
 function signOut()
 { 
   logIn();
-  isAdmin();
+  // isAdmin();
 }
 //Place the curser on the search box
 //The parent div must contain "name = 'input_box_parent'"

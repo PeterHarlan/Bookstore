@@ -47,12 +47,13 @@ html(lang='en')
                       button#SignUp.dropdown-item(type='button', onclick='signUp()' href="/signUp.html") Sign Up
                   // If Logged In
                   #navIsLogIn(style='display: none;')
-                    //button#CreatePage.dropdown-item(type='button', onclick='createPageLink()', style='display: none;') Create Page
                     button#SignOut.dropdown-item.example(type='button', onclick='signOut()' href="/logout:1") Sign Out
               li.nav-item
                 a.nav-link.active(href='#') Orders
               li.nav-item
                 a.nav-link.active(href='/adminCheck:1') Admin
+              li.nav-item
+                a.nav-link.active(href="/logout:1") Sign Out
               li.nav-item
                 a.nav-link.active(href='/shoppingCart:1')
                   i.fa.fa-shopping-cart(aria-hidden='true')
