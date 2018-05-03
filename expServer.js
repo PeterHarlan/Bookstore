@@ -375,7 +375,7 @@ app.post("/insert", function (req, res) {
 });
 
 
-//Insert book function
+//Insert user function
 app.post("/newUser", function (req, res) {
 
     //Grab book information from post object
