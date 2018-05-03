@@ -212,6 +212,34 @@ app.post('/searchRes', function (req, res) {
     }
 });
 
+app.get('/searchRes:searchInput', function (req, res) {
+    if (!req.session.user)
+    res.render('thanks', {
+        message: "You are currently not logged in, please log in or sign up at the top of the page to continue"
+    });
+    else {
+        phrase = req.params.searchInput.slice(1);
+        let sql = 'SELECT * FROM books ' +
+        'WHERE author LIKE "%' + phrase + '%" OR ' +
+        'title LIKE "%' + phrase + '%" OR ' +
+        'isbn LIKE "%' + phrase + '%" OR ' +
+        'pub LIKE "%' + phrase + '%"';
+
+        let query = DB.query(sql, (err, results) => {
+            //if error or not found display results
+            if (err) throw err;
+            if (results[0] == undefined) {
+                res.sendFile(path.join(__dirname + '/error404.html'));
+            //else send book info to the page
+            } else {
+                res.render('searchRes', {
+                    books: results
+                });
+            }
+        });
+    }
+});
+
 
 //check Admin
 app.get("/adminCheck:usID", function (req, res) {
